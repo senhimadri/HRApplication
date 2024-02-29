@@ -6,6 +6,7 @@ public abstract class BaseDomainEntity
     public DateTime DteCtratedAt { get; set; }
     public long IntUpdatedBy { get; set; }
     public DateTime  DteUpdatedAt { get; set; }
+    public bool IsActive { get; set; }
 }
 
 

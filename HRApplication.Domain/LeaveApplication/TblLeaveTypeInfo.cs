@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HRApplication.Domain.CommonDomain;
+using System.Collections.ObjectModel;
 
-namespace HRApplication.Domain.LeaveApplication
+namespace HRApplication.Domain.LeaveApplication;
+
+public class TblLeaveTypeInfo : BaseDomainEntity
 {
-    internal class TblLeavetypeInfo
-    {
-    }
+    public string StrLeaveTypeName { get; set; } = string.Empty;
+    public string StrLeaveTypeCode { get; set; } = string.Empty;
+
+    public ICollection<TblLeaveBalance> TblLeaveBalance { get; set; } = new Collection<TblLeaveBalance>();
+    public ICollection<TblLeaveApplication> TblLeaveApplication { get; set; } = new Collection<TblLeaveApplication>();
 }
+
