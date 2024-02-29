@@ -6,4 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRApplication.Persistence\HRApplication.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

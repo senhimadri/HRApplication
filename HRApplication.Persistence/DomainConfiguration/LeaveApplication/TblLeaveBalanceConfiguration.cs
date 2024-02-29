@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HRApplication.Persistence.DomainConfiguration;
+namespace HRApplication.Persistence.DomainConfiguration.LeaveApplication;
 
 public class TblLeaveBalanceConfiguration : IEntityTypeConfiguration<TblLeaveBalance>
 {

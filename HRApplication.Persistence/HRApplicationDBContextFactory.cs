@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace HRApplication.Persistence;
 
@@ -11,7 +8,18 @@ public class HRApplicationDBContextFactory : IDesignTimeDbContextFactory<HRAppli
 {
     public HRApplicationDBContext CreateDbContext(string[] args)
     {
-        throw new NotImplementedException();
+        IConfigurationRoot configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+
+        var builder = new DbContextOptionsBuilder<HRApplicationDBContext>();
+
+        var connectionString = configuration.GetConnectionString("LeaveManagementConnectionString");
+
+        builder.UseSqlServer(connectionString);
+
+        return new HRApplicationDBContext(builder.Options);
     }
 }
 
