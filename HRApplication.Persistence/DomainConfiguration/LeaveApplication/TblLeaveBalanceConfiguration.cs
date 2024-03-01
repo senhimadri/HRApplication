@@ -8,6 +8,8 @@ public class TblLeaveBalanceConfiguration : IEntityTypeConfiguration<TblLeaveBal
 {
     public void Configure(EntityTypeBuilder<TblLeaveBalance> builder)
     {
+        builder.ToTable("TblLeaveBalance", "lev");
+
         builder.HasOne(e => e.TblEmployeeBasicInfo)
             .WithMany(d => d.TblLeaveBalance)
             .HasForeignKey(e => e.IntEmployeeId);

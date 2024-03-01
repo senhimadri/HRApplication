@@ -8,6 +8,11 @@ public class TblLeaveApplicationConfiguration : IEntityTypeConfiguration<TblLeav
 {
     public void Configure(EntityTypeBuilder<TblLeaveApplication> builder)
     {
+        builder.ToTable("TblLeaveApplication", "lev");
+
+        builder.Property(x => x.StrLeaveReason)
+            .HasMaxLength(200);
+
         builder.HasOne(e => e.TblEmployeeBasicInfo)
             .WithMany(d => d.TblLeaveApplication)
             .HasForeignKey(e => e.IntEmployeeId);

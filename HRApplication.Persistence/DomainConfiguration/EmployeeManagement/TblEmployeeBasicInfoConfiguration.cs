@@ -1,6 +1,7 @@
 ﻿using HRApplication.Domain.EmployeeManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace HRApplication.Persistence.DomainConfiguration.EmployeeManagement;
 
@@ -8,6 +9,15 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
 {
     public void Configure(EntityTypeBuilder<TblEmployeeBasicInfo> builder)
     {
+        builder.ToTable("TblEmployeeBasicInfo", "emp");
+
+        builder.Property(e => e.StrEmployeeName)
+            .HasMaxLength(100);
+
+        builder.Property(e => e.StrEmployeeCode)
+           .HasMaxLength(50);
+
+
         builder.HasOne(e => e.TblDepartmentInfo)
             .WithMany(d => d.TblEmployeeBasicInfo)
             .HasForeignKey(e => e.IntDepartmentId);
@@ -23,6 +33,20 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
         builder.HasOne(e => e.TblReligionInfo)
             .WithMany(d => d.TblEmployeeBasicInfo)
             .HasForeignKey(e => e.IntReligionId);
+
+
+        builder.HasData(
+            new TblEmployeeBasicInfo()
+            {
+                IntPrimaryId = 1,
+                StrEmployeeName = "Application Admin",
+                StrEmployeeCode = "AA001",
+                DteDateOfBirth = new DateTime(),
+                IntDepartmentId = 1,
+                IntDesignationId = 1,
+                IntGenderId = 1,
+                IntReligionId = 1
+            });
     }
 }
 

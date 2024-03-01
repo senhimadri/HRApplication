@@ -1,6 +1,7 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveApplication;
+using HRApplication.Domain.MasterConfiguratioDomain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,29 @@ public class HRApplicationDBContext: DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-        //{
-        //    if (entityType.ClrType.IsSubclassOf(typeof(BaseDomainEntity)))
-        //    {
-        //        // Set basic roles using Fluent API
-        //        modelBuilder.Entity(entityType.ClrType).Property<DateTime>("LastModifiedDate").IsRequired();
-        //        modelBuilder.Entity(entityType.ClrType).Property<DateTime>("DateCreated").IsRequired();
-        //    }
-        //}
-
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(HRApplicationDBContext).Assembly);
 
+        var entityTypes = modelBuilder.Model.GetEntityTypes()
+            .Where(e => typeof(BaseDomainEntity).IsAssignableFrom(e.ClrType));
 
+        foreach (var entityType in entityTypes)
+        {
+            modelBuilder.Entity(entityType.ClrType)
+                .HasKey("IntPrimaryId");
+        }
+    }
+
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
+        {
+            entity.Entity.DteUpdatedAt = DateTime.UtcNow;
+
+            if (entity.State == EntityState.Added)
+                entity.Entity.DteCtratedAt = DateTime.UtcNow;
+        }
+
+        return base.SaveChangesAsync(cancellationToken);
     }
 
 
@@ -47,5 +58,9 @@ public class HRApplicationDBContext: DbContext
     public DbSet<TblLeaveTypeInfo> TblLeaveTypeInfo { get; set; }
     public DbSet<TblLeaveApplication> TblLeaveApplication { get; set; }
     public DbSet<TblLeaveBalance> TblLeaveBalance { get; set; }
+
+    // Master Configuration
+    public DbSet<TblAccountInfo> TblAccountInfo { get; set; }
+
 }
 

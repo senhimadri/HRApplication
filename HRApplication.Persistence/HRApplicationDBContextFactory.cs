@@ -15,7 +15,7 @@ public class HRApplicationDBContextFactory : IDesignTimeDbContextFactory<HRAppli
 
         var builder = new DbContextOptionsBuilder<HRApplicationDBContext>();
 
-        var connectionString = configuration.GetConnectionString("LeaveManagementConnectionString");
+        var connectionString = configuration.GetConnectionString("HRApplicationConnectionString");
 
         builder.UseSqlServer(connectionString);
 

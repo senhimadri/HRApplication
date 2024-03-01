@@ -8,7 +8,7 @@ public class TblEmployeeBasicInfo : BaseDomainEntity
 {
     public string StrEmployeeName { get; set; } = string.Empty;
     public string StrEmployeeCode { get; set; } = string.Empty;
-    public DateTime DteDateOfBirth { get; set; } = new DateTime();
+    public DateTime? DteDateOfBirth { get; set; } = new DateTime();
 
     public long IntDepartmentId { get; set; }
     public TblDepartmentInfo TblDepartmentInfo { get; set; } = new TblDepartmentInfo();

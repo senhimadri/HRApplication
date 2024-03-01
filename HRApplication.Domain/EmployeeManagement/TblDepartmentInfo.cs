@@ -1,5 +1,6 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HRApplication.Domain.EmployeeManagement;
 

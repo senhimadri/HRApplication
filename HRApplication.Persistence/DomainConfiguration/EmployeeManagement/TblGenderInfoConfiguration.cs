@@ -8,6 +8,15 @@ public class TblGenderInfoConfiguration : IEntityTypeConfiguration<TblGenderInfo
 {
     public void Configure(EntityTypeBuilder<TblGenderInfo> builder)
     {
+
+        builder.ToTable("TblGenderInfo", "emp");
+
+        builder.Property(e => e.StrGenderName)
+            .HasMaxLength(100);
+
+        builder.Property(e => e.StrGenderCode)
+           .HasMaxLength(50);
+
         builder.HasData(
             new TblGenderInfo
             {
