@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace HRApplication.Domain.EmployeeManagement;
 
-public class TblEmployeeBasicInfo : BaseDomainEntity
+public class TblEmployeeBasicInfo : MasterConfigEntiy
 {
     public string StrEmployeeName { get; set; } = string.Empty;
     public string StrEmployeeCode { get; set; } = string.Empty;
@@ -12,7 +12,6 @@ public class TblEmployeeBasicInfo : BaseDomainEntity
 
     public long IntDepartmentId { get; set; }
     public TblDepartmentInfo TblDepartmentInfo { get; set; } = new TblDepartmentInfo();
-
     public long IntDesignationId { get; set; }
     public TblDesignationInfo TblDesignationInfo { get; set; } = new TblDesignationInfo();
     public long IntGenderId { get; set; }

@@ -4,7 +4,7 @@ using HRApplication.Domain.EmployeeManagement;
 
 namespace HRApplication.Domain.LeaveApplication;
 
-public class TblLeaveApplication : BaseDomainEntity
+public class TblLeaveApplication : MasterConfigEntiy
 {
     public long IntEmployeeId { get; set; }
     public TblEmployeeBasicInfo TblEmployeeBasicInfo { get; set; } = new TblEmployeeBasicInfo();

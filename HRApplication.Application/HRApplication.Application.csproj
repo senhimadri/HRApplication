@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Contract\Parsistence\EmployeeManagement\" />
+    <Folder Include="Contract\Parsistence\LeaveApplication\" />
+  </ItemGroup>
+
 </Project>

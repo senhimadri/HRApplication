@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HRApplication.Persistence.Migrations
 {
     [DbContext(typeof(HRApplicationDBContext))]
-    [Migration("20240301073802_EndAdition3")]
-    partial class EndAdition3
+    [Migration("20240301114658_First_Script")]
+    partial class First_Script
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,9 +38,6 @@ namespace HRApplication.Persistence.Migrations
 
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -71,7 +68,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 1L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -93,9 +89,6 @@ namespace HRApplication.Persistence.Migrations
 
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -126,7 +119,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 1L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -152,8 +144,11 @@ namespace HRApplication.Persistence.Migrations
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
+                    b.Property<long>("IntAccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntBusinessUnitId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -171,6 +166,12 @@ namespace HRApplication.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkPlaceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkplaceGroupId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsActive")
@@ -213,9 +214,6 @@ namespace HRApplication.Persistence.Migrations
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
-
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
 
@@ -245,7 +243,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 1L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -257,7 +254,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 2L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -269,7 +265,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 3L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -291,9 +286,6 @@ namespace HRApplication.Persistence.Migrations
 
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -324,7 +316,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 1L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -356,8 +347,11 @@ namespace HRApplication.Persistence.Migrations
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
+                    b.Property<long>("IntAccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntBusinessUnitId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -369,6 +363,12 @@ namespace HRApplication.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkPlaceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkplaceGroupId")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsActive")
@@ -402,8 +402,11 @@ namespace HRApplication.Persistence.Migrations
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
+                    b.Property<long>("IntAccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntBusinessUnitId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
@@ -424,6 +427,12 @@ namespace HRApplication.Persistence.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkPlaceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkplaceGroupId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("IntYearId")
@@ -455,9 +464,6 @@ namespace HRApplication.Persistence.Migrations
                     b.Property<DateTime>("DteUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IntAccountId")
-                        .HasColumnType("int");
-
                     b.Property<long>("IntCreatedBy")
                         .HasColumnType("bigint");
 
@@ -486,7 +492,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 1L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -498,7 +503,6 @@ namespace HRApplication.Persistence.Migrations
                             IntPrimaryId = 2L,
                             DteCtratedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DteUpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            IntAccountId = 0,
                             IntCreatedBy = 0L,
                             IntUpdatedBy = 0L,
                             IsActive = false,
@@ -507,21 +511,155 @@ namespace HRApplication.Persistence.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratioDomain.TblAccountInfo", b =>
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblAccountInfo", b =>
                 {
-                    b.Property<int>("IntPrimaryId")
+                    b.Property<long>("IntPrimaryId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IntPrimaryId"));
+
+                    b.Property<DateTime>("DteCtratedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DteUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IntPrimaryId"));
+                    b.Property<long>("IntCreatedBy")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("StrAccountName")
+                    b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StrAccountDescreption")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("StrAccountName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.HasKey("IntPrimaryId");
 
-                    b.ToTable("TblAccountInfo");
+                    b.ToTable("TblAccountInfo", "base");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblBusinessUnitInfo", b =>
+                {
+                    b.Property<long>("IntPrimaryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DteCtratedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DteUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("IntAccountId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntCreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StrBusinessUnitDescreption")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StrBusinessUnitName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("IntPrimaryId");
+
+                    b.ToTable("TblBusinessUnitInfo", "base");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblWorkplaceGroupInfo", b =>
+                {
+                    b.Property<long>("IntPrimaryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DteCtratedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DteUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("IntBusinessUnitId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntCreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StrWorkplaceGroupDescreption")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StrWorkplaceGroupName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("IntPrimaryId");
+
+                    b.ToTable("TblWorkplaceGroupInfo", "base");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblWorkplaceInfo", b =>
+                {
+                    b.Property<long>("IntPrimaryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DteCtratedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DteUpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("IntCreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntUpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IntWorkplaceGroupId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StrWorkplaceDescreption")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StrWorkplaceName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("IntPrimaryId");
+
+                    b.ToTable("TblWorkplaceInfo", "base");
                 });
 
             modelBuilder.Entity("HRApplication.Domain.EmployeeManagement.TblEmployeeBasicInfo", b =>
@@ -597,6 +735,39 @@ namespace HRApplication.Persistence.Migrations
                     b.Navigation("TblLeaveTypeInfo");
                 });
 
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblBusinessUnitInfo", b =>
+                {
+                    b.HasOne("HRApplication.Domain.MasterConfiguratio.TblAccountInfo", "TblAccountInfo")
+                        .WithMany("TblBusinessUnitInfo")
+                        .HasForeignKey("IntPrimaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TblAccountInfo");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblWorkplaceGroupInfo", b =>
+                {
+                    b.HasOne("HRApplication.Domain.MasterConfiguratio.TblBusinessUnitInfo", "TblBusinessUnitInfo")
+                        .WithMany("TblWorkplaceGroupInfo")
+                        .HasForeignKey("IntPrimaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TblBusinessUnitInfo");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblWorkplaceInfo", b =>
+                {
+                    b.HasOne("HRApplication.Domain.MasterConfiguratio.TblWorkplaceGroupInfo", "TblWorkplaceGroupInfo")
+                        .WithMany("TblWorkplaceInfo")
+                        .HasForeignKey("IntPrimaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TblWorkplaceGroupInfo");
+                });
+
             modelBuilder.Entity("HRApplication.Domain.EmployeeManagement.TblDepartmentInfo", b =>
                 {
                     b.Navigation("TblEmployeeBasicInfo");
@@ -629,6 +800,21 @@ namespace HRApplication.Persistence.Migrations
                     b.Navigation("TblLeaveApplication");
 
                     b.Navigation("TblLeaveBalance");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblAccountInfo", b =>
+                {
+                    b.Navigation("TblBusinessUnitInfo");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblBusinessUnitInfo", b =>
+                {
+                    b.Navigation("TblWorkplaceGroupInfo");
+                });
+
+            modelBuilder.Entity("HRApplication.Domain.MasterConfiguratio.TblWorkplaceGroupInfo", b =>
+                {
+                    b.Navigation("TblWorkplaceInfo");
                 });
 #pragma warning restore 612, 618
         }

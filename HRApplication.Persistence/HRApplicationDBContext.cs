@@ -1,13 +1,8 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveApplication;
-using HRApplication.Domain.MasterConfiguratioDomain;
+using HRApplication.Domain.MasterConfiguratio;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HRApplication.Persistence;
 
@@ -40,7 +35,10 @@ public class HRApplicationDBContext: DbContext
             entity.Entity.DteUpdatedAt = DateTime.UtcNow;
 
             if (entity.State == EntityState.Added)
+            {
                 entity.Entity.DteCtratedAt = DateTime.UtcNow;
+                entity.Entity.IsActive = true;
+            }
         }
 
         return base.SaveChangesAsync(cancellationToken);
@@ -61,6 +59,9 @@ public class HRApplicationDBContext: DbContext
 
     // Master Configuration
     public DbSet<TblAccountInfo> TblAccountInfo { get; set; }
+    public DbSet<TblBusinessUnitInfo> TblBusinessUnitInfo { get; set; }
+    public DbSet<TblWorkplaceGroupInfo> TblWorkplaceGroupInfo { get; set; }
+    public DbSet<TblWorkplaceInfo> TblWorkplaceInfo { get; set; }
 
 }
 

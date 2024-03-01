@@ -35,18 +35,18 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
             .HasForeignKey(e => e.IntReligionId);
 
 
-        builder.HasData(
-            new TblEmployeeBasicInfo()
-            {
-                IntPrimaryId = 1,
-                StrEmployeeName = "Application Admin",
-                StrEmployeeCode = "AA001",
-                DteDateOfBirth = new DateTime(),
-                IntDepartmentId = 1,
-                IntDesignationId = 1,
-                IntGenderId = 1,
-                IntReligionId = 1
-            });
+        //builder.HasData(
+        //    new TblEmployeeBasicInfo()
+        //    {
+        //        IntPrimaryId = 1,
+        //        StrEmployeeName = "Application Admin",
+        //        StrEmployeeCode = "AA001",
+        //        DteDateOfBirth = new DateTime(),
+        //        IntDepartmentId = 1,
+        //        IntDesignationId = 1,
+        //        IntGenderId = 1,
+        //        IntReligionId = 1
+        //    });
     }
 }
 
