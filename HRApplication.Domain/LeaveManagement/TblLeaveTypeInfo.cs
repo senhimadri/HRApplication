@@ -1,7 +1,7 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using System.Collections.ObjectModel;
 
-namespace HRApplication.Domain.LeaveApplication;
+namespace HRApplication.Domain.LeaveManagement;
 
 public class TblLeaveTypeInfo : BaseDomainEntity
 {

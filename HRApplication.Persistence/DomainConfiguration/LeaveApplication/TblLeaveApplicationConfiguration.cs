@@ -1,4 +1,4 @@
-﻿using HRApplication.Domain.LeaveApplication;
+﻿using HRApplication.Domain.LeaveManagement;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

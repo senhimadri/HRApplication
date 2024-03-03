@@ -1,5 +1,5 @@
 ﻿using HRApplication.Domain.CommonDomain;
-using HRApplication.Domain.LeaveApplication;
+using HRApplication.Domain.LeaveManagement;
 using System.Collections.ObjectModel;
 
 namespace HRApplication.Domain.EmployeeManagement;

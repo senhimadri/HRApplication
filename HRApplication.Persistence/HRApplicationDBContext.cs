@@ -1,6 +1,6 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using HRApplication.Domain.EmployeeManagement;
-using HRApplication.Domain.LeaveApplication;
+using HRApplication.Domain.LeaveManagement;
 using HRApplication.Domain.MasterConfiguratio;
 using Microsoft.EntityFrameworkCore;
 
