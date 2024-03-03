@@ -1,5 +1,6 @@
 ﻿using HRApplication.Application.Contract.Parsistence.CommonServices;
 using HRApplication.Domain.CommonDomain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,65 +12,87 @@ namespace HRApplication.Persistence.Repositories.CommonServices;
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEntity
 {
 
-    public Task<T> AddAsync(T entity)
+    private readonly HRApplicationDBContext _context;
+    public GenericRepository(HRApplicationDBContext context) => _context = context;
+
+    public Task<List<T>> AddMultiple(List<T> entitys)
     {
         throw new NotImplementedException();
     }
 
-    public Task<List<T>> AddAllAsync(List<T> entitys)
+    public Task<T> AddOne(T entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateAsync(T entity)
+    public Task DeleteMultiple(List<T> entitys)
     {
         throw new NotImplementedException();
     }
 
-    public Task UpdateAllAsync(List<T> entitys)
+    public Task DeleteMultiple(List<long> entitys)
     {
         throw new NotImplementedException();
     }
 
-
-
-
-
-    public Task DeleteAllAsync(List<T> entitys)
+    public Task DeleteOne(T entity)
     {
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(T entity)
+    public Task DeleteOne(long IntPrimaryId)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IReadOnlyList<T>> GetAllAsync()
+    public Task<IQueryable<T>> FindMultiple()
     {
         throw new NotImplementedException();
     }
 
-    public Task<T> GetAsync(long Id)
+    public Task<T> FindOne(long Id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> IsExistAsync(long id)
+    public Task HardDeleteMultiple(List<T> entitys)
     {
         throw new NotImplementedException();
     }
 
-    public Task SoftDeleteAllAsync(List<T> entitys)
+    public Task HardDeleteMultiple(List<long> entitys)
     {
         throw new NotImplementedException();
     }
 
-    public Task SoftDeleteAsync(T entity)
+    public Task HardDeleteOne(T entity)
     {
         throw new NotImplementedException();
     }
 
+    public Task HardDeleteOne(long IntPrimaryId)
+    {
+        throw new NotImplementedException();
+    }
 
+    public Task<bool> IsExist(long PrimaryId)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<bool> IsExist(T entity)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateMultiple(List<T> entitys)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task UpdateOne(T entity)
+    {
+        throw new NotImplementedException();
+    }
 }
 
