@@ -25,6 +25,10 @@ public class HRApplicationDBContext: DbContext
         {
             modelBuilder.Entity(entityType.ClrType)
                 .HasKey("IntPrimaryId");
+
+            modelBuilder.Entity(entityType.ClrType)
+                .Property("IntPrimaryId")
+                .ValueGeneratedOnAdd();
         }
     }
 

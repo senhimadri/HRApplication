@@ -6,7 +6,6 @@ namespace HRApplication.Domain.MasterConfiguratio;
 
 public class TblAccountInfo : BaseDomainEntity
 {
-    public int Id { get; set; }
     public string StrAccountName { get; set; } = string.Empty;
     public string StrAccountDescreption { get; set; } = string.Empty;
 

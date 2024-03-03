@@ -11,6 +11,9 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
     {
         builder.ToTable("TblEmployeeBasicInfo", "emp");
 
+        builder.Property(e => e.IntPrimaryId)
+                .ValueGeneratedOnAdd();
+
         builder.Property(e => e.StrEmployeeName)
             .HasMaxLength(100);
 
@@ -21,6 +24,7 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
         builder.HasOne(e => e.TblDepartmentInfo)
             .WithMany(d => d.TblEmployeeBasicInfo)
             .HasForeignKey(e => e.IntDepartmentId);
+            //.OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(e => e.TblDesignationInfo)
             .WithMany(d => d.TblEmployeeBasicInfo)

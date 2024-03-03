@@ -10,6 +10,7 @@ public class TblDepartmentInfoConfiguration : IEntityTypeConfiguration<TblDepart
     {
         builder.ToTable("TblDepartmentInfo", "emp");
 
+
         builder.Property(e => e.StrDepartmentName)
             .HasMaxLength(100);
 
