@@ -36,12 +36,16 @@ public class HRApplicationDBContext: DbContext
     {
         foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
         {
-            entity.Entity.DteUpdatedAt = DateTime.UtcNow;
-
             if (entity.State == EntityState.Added)
             {
                 entity.Entity.DteCtratedAt = DateTime.UtcNow;
+                entity.Entity.IntCreatedBy = 1;
                 entity.Entity.IsActive = true;
+            }
+            else if(entity.State == EntityState.Modified)
+            {
+                entity.Entity.DteUpdatedAt = DateTime.UtcNow;
+                entity.Entity.IntUpdatedBy = 1;
             }
         }
 

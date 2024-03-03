@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HRApplication.Application\HRApplication.Application.csproj" />
     <ProjectReference Include="..\HRApplication.Domain\HRApplication.Domain.csproj" />
   </ItemGroup>
 
