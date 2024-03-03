@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using HRApplication.Domain.MasterConfiguratio;
 
-namespace HRApplication.Persistence.DomainConfiguration.MasterConfiguratioDomain;
+namespace HRApplication.Persistence.DomainConfiguration.MasterConfiguration;
 
 public class TblBusinessUnitInfoConfiguration : IEntityTypeConfiguration<TblBusinessUnitInfo>
 {

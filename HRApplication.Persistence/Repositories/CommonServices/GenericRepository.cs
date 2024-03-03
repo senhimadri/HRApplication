@@ -1,4 +1,4 @@
-﻿using HRApplication.Application.Contract.Parsistence.CommonServices;
+﻿using HRApplication.Application.Contracts.Parsistence.CommonServices;
 using HRApplication.Domain.CommonDomain;
 using Microsoft.EntityFrameworkCore;
 using System;
