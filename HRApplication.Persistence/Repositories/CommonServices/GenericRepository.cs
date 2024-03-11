@@ -1,5 +1,6 @@
 ﻿using HRApplication.Application.Contracts.Parsistence.CommonServices;
 using HRApplication.Domain.CommonDomain;
+using HRApplication.Domain.EmployeeManagement;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,45 +16,58 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
     private readonly HRApplicationDBContext _context;
     public GenericRepository(HRApplicationDBContext context) => _context = context;
 
-    public Task<List<T>> AddMultiple(List<T> entitys)
+
+    public async Task<T> AddOne(T entity)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(entity);
+        return entity;
+
+
+    }
+    public async Task<List<T>> AddMultiple(List<T> entitys)
+    {
+        await _context.AddRangeAsync(entitys);
+        return entitys;
     }
 
-    public Task<T> AddOne(T entity)
+    public async Task DeleteMultiple(List<T> entitys)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().RemoveRange(entitys);
+        await _context.SaveChangesAsync();
     }
 
-    public Task DeleteMultiple(List<T> entitys)
+    public async Task DeleteMultiple(List<long> entitys)
     {
-        throw new NotImplementedException();
+        await _context.Set<T>()
+                      .Where(x => entitys.Contains(x.IntPrimaryId))
+                      .ExecuteUpdateAsync(setters => setters
+                                            .SetProperty(b => b.IsActive, false));
+                        
     }
 
-    public Task DeleteMultiple(List<long> entitys)
+    public async Task DeleteOne(T entity)
     {
-        throw new NotImplementedException();
+        _context.Set<T>().Remove(entity);
+        await _context.SaveChangesAsync();
     }
 
-    public Task DeleteOne(T entity)
+    public async Task DeleteOne(long IntPrimaryId)
     {
-        throw new NotImplementedException();
+        await _context.Set<T>()
+              .Where(x => x.IntPrimaryId == IntPrimaryId)
+              .ExecuteUpdateAsync(setters => setters
+                                    .SetProperty(b => b.IsActive, false));
     }
 
-    public Task DeleteOne(long IntPrimaryId)
+    public async Task<IReadOnlyList<T>> FindAll()
     {
-        throw new NotImplementedException();
+        return await _context.Set<T>().ToListAsync();
+    }
+    public async Task<T> FindOne(long Id)
+    {
+        return await _context.Set<T>().FindAsync(Id) ?? Activator.CreateInstance<T>();
     }
 
-    public Task<IQueryable<T>> FindMultiple()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<T> FindOne(long Id)
-    {
-        throw new NotImplementedException();
-    }
 
     public Task HardDeleteMultiple(List<T> entitys)
     {
@@ -75,9 +89,10 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
         throw new NotImplementedException();
     }
 
-    public Task<bool> IsExist(long PrimaryId)
+    public async Task<bool> IsExist(long PrimaryId)
     {
-        throw new NotImplementedException();
+        var entity = await FindOne(PrimaryId);
+        return entity is not null;
     }
 
     public Task<bool> IsExist(T entity)

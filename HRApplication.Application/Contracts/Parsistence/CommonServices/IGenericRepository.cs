@@ -4,7 +4,7 @@ namespace HRApplication.Application.Contracts.Parsistence.CommonServices;
 public interface IGenericRepository<T> where T : class
 {
     Task<T> FindOne(long Id);
-    Task<IQueryable<T>> FindMultiple();
+    Task<IReadOnlyList<T>> FindAll();
 
     Task<T> AddOne(T entity);
     Task<List<T>> AddMultiple(List<T> entitys);
