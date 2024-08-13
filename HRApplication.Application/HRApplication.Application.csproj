@@ -14,4 +14,8 @@
     <Folder Include="MappingProfiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HRApplication.Domain\HRApplication.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

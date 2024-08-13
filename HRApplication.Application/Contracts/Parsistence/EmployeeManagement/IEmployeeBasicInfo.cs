@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HRApplication.Application.Contracts.Parsistence.CommonServices;
+using HRApplication.Domain.EmployeeManagement;
 
-namespace HRApplication.Application.Contracts.Parsistence.EmployeeManagement
-{
-    internal interface IEmployeeBasicInfo
-    {
-    }
-}
+namespace HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
+
+public interface IEmployeeBasicInfo : IGenericRepository<TblEmployeeBasicInfo>;

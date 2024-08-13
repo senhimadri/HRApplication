@@ -1,5 +1,4 @@
-﻿
-namespace HRApplication.Application.Contracts.Parsistence.CommonServices;
+﻿namespace HRApplication.Application.Contracts.Parsistence.CommonServices;
 
 public interface IGenericRepository<T> where T : class
 {
