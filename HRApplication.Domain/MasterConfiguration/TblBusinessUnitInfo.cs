@@ -5,13 +5,12 @@ namespace HRApplication.Domain.MasterConfiguratio;
 
 public class TblBusinessUnitInfo : BaseDomainEntity
 {
-    public string StrBusinessUnitName { get; set; } = string.Empty;
-    public string StrBusinessUnitDescreption { get; set; } = string.Empty;
+    public string? StrBusinessUnitName { get; set; }
+    public string? StrBusinessUnitDescreption { get; set; }
 
     public long IntAccountId { get; set; }
-    public TblAccountInfo TblAccountInfo { get; set; } = new TblAccountInfo();
+    public TblAccountInfo? TblAccountInfo { get; set; }
 
-    public ICollection<TblWorkplaceGroupInfo> TblWorkplaceGroupInfo { get; set; } = new Collection<TblWorkplaceGroupInfo>();
-    //public ICollection<TblWorkplaceInfo> TblWorkplaceInfo { get; set; } = new Collection<TblWorkplaceInfo>();
+    public ICollection<TblWorkplaceGroupInfo>? TblWorkplaceGroupInfo { get; set; }
 }
 

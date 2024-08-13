@@ -6,9 +6,9 @@ namespace HRApplication.Domain.EmployeeManagement;
 
 public class TblDepartmentInfo: BaseDomainEntity
 {
-    public string StrDepartmentName { get; set; } = string.Empty;
-    public string StrDepartmentCode { get; set; } = string.Empty;
+    public string? StrDepartmentName { get; set; } 
+    public string? StrDepartmentCode { get; set; }
 
-    public ICollection<TblEmployeeBasicInfo> TblEmployeeBasicInfo { get; set; } = new Collection<TblEmployeeBasicInfo>();
+    public ICollection<TblEmployeeBasicInfo>? TblEmployeeBasicInfo { get; set; }
 }
 

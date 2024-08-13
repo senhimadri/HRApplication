@@ -6,11 +6,9 @@ namespace HRApplication.Domain.LeaveManagement;
 public class TblLeaveBalance: MasterConfigEntiy
 {
     public long IntEmployeeId { get; set; }
-    public TblEmployeeBasicInfo TblEmployeeBasicInfo { get; set; } = new TblEmployeeBasicInfo();
-
+    public TblEmployeeBasicInfo? TblEmployeeBasicInfo { get; set; }
     public long IntLeaveTypeId { get; set; }
-    public TblLeaveTypeInfo TblLeaveTypeInfo { get; set; } = new TblLeaveTypeInfo();
-
+    public TblLeaveTypeInfo? TblLeaveTypeInfo { get; set; }
     public int IntYearId { get; set; }
     public int IntLeaveBalance { get; set; }
     public int IntLeaveTaken { get; set; }

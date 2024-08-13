@@ -5,10 +5,10 @@ namespace HRApplication.Domain.LeaveManagement;
 
 public class TblLeaveTypeInfo : BaseDomainEntity
 {
-    public string StrLeaveTypeName { get; set; } = string.Empty;
-    public string StrLeaveTypeCode { get; set; } = string.Empty;
+    public string? StrLeaveTypeName { get; set; }
+    public string? StrLeaveTypeCode { get; set; }
 
-    public ICollection<TblLeaveBalance> TblLeaveBalance { get; set; } = new Collection<TblLeaveBalance>();
-    public ICollection<TblLeaveApplication> TblLeaveApplication { get; set; } = new Collection<TblLeaveApplication>();
+    public ICollection<TblLeaveBalance>? TblLeaveBalance { get; set; } 
+    public ICollection<TblLeaveApplication>? TblLeaveApplication { get; set; }
 }
 

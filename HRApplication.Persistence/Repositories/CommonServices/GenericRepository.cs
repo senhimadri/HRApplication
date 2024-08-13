@@ -1,12 +1,7 @@
 ﻿using HRApplication.Application.Contracts.Parsistence.CommonServices;
 using HRApplication.Domain.CommonDomain;
-using HRApplication.Domain.EmployeeManagement;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace HRApplication.Persistence.Repositories.CommonServices;
 
@@ -63,9 +58,27 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
     {
         return await _context.Set<T>().ToListAsync();
     }
+
+    public async Task<IReadOnlyList<T>> FindAll(Expression<Func<T, bool>> filter)
+    {
+        return await _context.Set<T>().Where(filter).ToListAsync();
+    }
     public async Task<T> FindOne(long Id)
     {
-        return await _context.Set<T>().FindAsync(Id) ?? Activator.CreateInstance<T>();
+        var res = await _context.Set<T>().FindAsync(Id);
+        if (res is not null)
+            return res;
+
+        return Activator.CreateInstance<T>();
+    }
+
+    public async Task<T> FindOne(Expression<Func<T, bool>> filter)
+    {
+        var res = await _context.Set<T>().FirstOrDefaultAsync(filter);
+        if (res is not null)
+            return res;
+
+        return Activator.CreateInstance<T>();
     }
 
 
