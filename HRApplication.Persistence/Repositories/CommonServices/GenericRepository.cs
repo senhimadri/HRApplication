@@ -7,120 +7,90 @@ namespace HRApplication.Persistence.Repositories.CommonServices;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEntity
 {
+    private readonly DbContext _context;
+    private readonly DbSet<T> _dbSet;
 
-    private readonly HRApplicationDBContext _context;
-    public GenericRepository(HRApplicationDBContext context) => _context = context;
+    public GenericRepository(DbContext context) => (_context, _dbSet)=(context, context.Set<T>());
 
-
-    public async Task<T> AddOne(T entity)
+    public async Task<T?> GetOne(long intPrimaryId)
     {
-        await _context.AddAsync(entity);
+        return await _dbSet.FindAsync(intPrimaryId);
+    }
+
+    public async Task<List<T>> GetMany(Expression<Func<T, bool>> filter)
+    {
+        return await _dbSet.Where(filter).ToListAsync();
+    }
+
+    public async Task<T> InsertOne(T entity)
+    {
+        await _dbSet.AddAsync(entity);
         return entity;
-
-
-    }
-    public async Task<List<T>> AddMultiple(List<T> entitys)
-    {
-        await _context.AddRangeAsync(entitys);
-        return entitys;
     }
 
-    public async Task DeleteMultiple(List<T> entitys)
+    public async Task<List<T>> InsertMany(List<T> entities)
     {
-        _context.Set<T>().RemoveRange(entitys);
-        await _context.SaveChangesAsync();
+        await _dbSet.AddRangeAsync(entities);
+        return entities;
     }
 
-    public async Task DeleteMultiple(List<long> entitys)
+    public Task ModifyOne(T entity)
     {
-        await _context.Set<T>()
-                      .Where(x => entitys.Contains(x.IntPrimaryId))
-                      .ExecuteUpdateAsync(setters => setters
-                                            .SetProperty(b => b.IsActive, false));
-                        
+        _dbSet.Update(entity);
+        return Task.CompletedTask;
     }
 
-    public async Task DeleteOne(T entity)
+    public Task ModifyMany(List<T> entities)
     {
-        _context.Set<T>().Remove(entity);
-        await _context.SaveChangesAsync();
+        _dbSet.UpdateRange(entities);
+        return Task.CompletedTask;
     }
 
     public async Task DeleteOne(long IntPrimaryId)
     {
-        await _context.Set<T>()
-              .Where(x => x.IntPrimaryId == IntPrimaryId)
-              .ExecuteUpdateAsync(setters => setters
-                                    .SetProperty(b => b.IsActive, false));
+        var entity = await GetOne(IntPrimaryId);
+        if (entity is not null)
+            _dbSet.Remove(entity);
     }
 
-    public async Task<IReadOnlyList<T>> FindAll()
+    public async Task DeleteMany(Expression<Func<T, bool>> filter)
     {
-        return await _context.Set<T>().ToListAsync();
+        var entities = await GetMany(filter);
+
+        if (entities.Any())
+            _dbSet.RemoveRange(entities);
+
     }
 
-    public async Task<IReadOnlyList<T>> FindAll(Expression<Func<T, bool>> filter)
+    public async Task InActiveOne(long IntPrimaryId)
     {
-        return await _context.Set<T>().Where(filter).ToListAsync();
-    }
-    public async Task<T> FindOne(long Id)
-    {
-        var res = await _context.Set<T>().FindAsync(Id);
-        if (res is not null)
-            return res;
-
-        return Activator.CreateInstance<T>();
+        var entity = await GetOne(IntPrimaryId);
+        if (entity is not null)
+        {
+            entity.IsActive = false;
+            await ModifyOne(entity);
+        }
     }
 
-    public async Task<T> FindOne(Expression<Func<T, bool>> filter)
+    public async Task InActiveMany(Expression<Func<T, bool>> filter)
     {
-        var res = await _context.Set<T>().FirstOrDefaultAsync(filter);
-        if (res is not null)
-            return res;
+        var entities = await GetMany(filter);
 
-        return Activator.CreateInstance<T>();
-    }
-
-
-    public Task HardDeleteMultiple(List<T> entitys)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task HardDeleteMultiple(List<long> entitys)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task HardDeleteOne(T entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task HardDeleteOne(long IntPrimaryId)
-    {
-        throw new NotImplementedException();
+        if (entities.Any())
+        {
+            entities.ForEach(x => x.IsActive = false);
+            await ModifyMany(entities);
+        }
     }
 
     public async Task<bool> IsExist(long PrimaryId)
     {
-        var entity = await FindOne(PrimaryId);
-        return entity is not null;
+        return await _dbSet.AnyAsync(e => e.IntPrimaryId == PrimaryId);
     }
 
-    public Task<bool> IsExist(T entity)
+    public async Task<long> GetCount(Expression<Func<T, bool>> filter)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateMultiple(List<T> entitys)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateOne(T entity)
-    {
-        throw new NotImplementedException();
+        return await _dbSet.CountAsync(filter);
     }
 }
 

@@ -17,7 +17,6 @@ public class TblEmployeeBasicInfo : MasterConfigEntiy
     public TblGenderInfo? TblGenderInfo { get; set; }
     public long IntReligionId { get; set; }
     public TblReligionInfo? TblReligionInfo { get; set; }
-
     public ICollection<TblLeaveBalance>? TblLeaveBalance { get; set; }
     public ICollection<TblLeaveApplication>? TblLeaveApplication { get; set; } 
 }
