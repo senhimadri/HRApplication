@@ -3,7 +3,4 @@ using HRApplication.Domain.EmployeeManagement;
 
 namespace HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
 
-public interface IEmployeeBasicInfoRepository : IGenericRepository<TblEmployeeBasicInfo>
-{
-
-}
+public interface IEmployeeBasicInfoRepository : IGenericRepository<TblEmployeeBasicInfo>;
