@@ -5,5 +5,5 @@ namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInf
 
 public class CreateEmployeeBasicInfoCommand : IRequest<long>
 {
-    public CreateEmployeeBasicInfoDto? employeeBasicInfoDtp { get; set; }
+    public CreateEmployeeBasicInfoDto employeeBasicInfo { get; set; } = new CreateEmployeeBasicInfoDto();
 }
