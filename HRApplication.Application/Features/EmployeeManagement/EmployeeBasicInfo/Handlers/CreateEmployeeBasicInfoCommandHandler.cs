@@ -2,6 +2,7 @@ using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.DataTransferObjects.LeaveManagement.Validator;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.Requests;
+using HRApplication.Application.MappingProfiles.EmployeeManagement;
 using HRApplication.Domain.EmployeeManagement;
 using MediatR;
 using System.IO.MemoryMappedFiles;
@@ -13,7 +14,7 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
     private readonly IUnitofWork _unitofWork;
 
     public CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) 
-                                        => _unitofWork= unitofWork;
+                                        => _unitofWork = unitofWork;
 
     public async Task<long> Handle(CreateEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {
@@ -23,26 +24,12 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
         if (!validationResult.IsValid)
             throw new Exception(validationResult.ToString());
 
-        var employeeBasicInfo = mapper(request.employeeBasicInfo);
+        var employeeBasicInfo = EmployeeBasicInfoMap.mapper(request.employeeBasicInfo);
 
         employeeBasicInfo = await _unitofWork.EmployeeBasicInfoRepository.InsertOne(employeeBasicInfo);
 
         await _unitofWork.SaveAsync();
 
         return employeeBasicInfo.IntPrimaryId;
-    }
-
-    public TblEmployeeBasicInfo mapper (CreateEmployeeBasicInfoDto data)
-    {
-        return new TblEmployeeBasicInfo()
-        {
-            StrEmployeeName =data.StrEmployeeName ,
-            StrEmployeeCode =data.StrEmployeeCode ,
-            DteDateOfBirth =data.DteDateOfBirth ,
-            IntDepartmentId =data.IntDepartmentId ,
-            IntDesignationId =data.IntDesignationId ,
-            IntGenderId =data.IntGenderId ,
-            IntReligionId =data.IntReligionId
-        };
     }
 }
