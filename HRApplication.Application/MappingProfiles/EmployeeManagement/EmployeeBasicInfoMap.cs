@@ -35,7 +35,7 @@ public static class EmployeeBasicInfoMap
         };
     }
 
-    public static List<GetEmployeeBasicInfoDto> GetEmployeeList(IQueryable<TblEmployeeBasicInfo> data)
+    public static List<GetEmployeeBasicInfoDto> GetEmployeeList(IList<TblEmployeeBasicInfo> data)
     {
         return data.Select(x=> new GetEmployeeBasicInfoDto
         {
@@ -43,10 +43,10 @@ public static class EmployeeBasicInfoMap
             StrEmployeeName = x.StrEmployeeName,
             StrEmployeeCode =x.StrEmployeeCode,
             DteDateOfBirth = x.DteDateOfBirth,
-            StrDepartment = (x.TblDepartmentInfo.StrDepartmentName),
-            StrDesignation = x.TblDesignationInfo.StrDesignationName,
-            StrGender = x.TblGenderInfo.StrGenderName,
-            StrReligionId = x.TblReligionInfo.StrReligionName
+            StrDepartment = (x.TblDepartmentInfo?.StrDepartmentName),
+            StrDesignation = x.TblDesignationInfo?.StrDesignationName,
+            StrGender = x.TblGenderInfo?.StrGenderName,
+            StrReligionId = x.TblReligionInfo?.StrReligionName
         }).ToList();
     }
 }

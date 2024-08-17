@@ -17,6 +17,6 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetMany(x => request.DepartmentId == 0 || x.IntDepartmentId ==request.DepartmentId);
 
-        return  EmployeeBasicInfoMap.GetEmployee()
+        return EmployeeBasicInfoMap.GetEmployeeList(EmployeeDetails);
     }
 }
