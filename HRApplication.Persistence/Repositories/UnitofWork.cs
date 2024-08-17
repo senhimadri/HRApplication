@@ -6,9 +6,9 @@ namespace HRApplication.Persistence.Repositories;
 
 public class UnitofWork : IUnitofWork
 {
-    private readonly DbContext _context;
+    private readonly HRApplicationDBContext _context;
     private IEmployeeBasicInfoRepository? _employeeBasicInfoRepository;
-    public UnitofWork(DbContext context) => _context = context;
+    public UnitofWork(HRApplicationDBContext context) => _context = context;
 
     public IEmployeeBasicInfoRepository EmployeeBasicInfoRepository => 
                                     _employeeBasicInfoRepository ??= new EmployeeBasicInfoRepository(_context);

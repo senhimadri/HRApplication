@@ -1,7 +1,7 @@
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using MediatR;
 
-namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.Requests;
+namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
 
 public class CreateEmployeeBasicInfoCommand : IRequest<long>
 {

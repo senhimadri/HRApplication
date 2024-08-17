@@ -1,4 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HRApplication.Application.Contracts.Parsistence;
+using HRApplication.Application.Contracts.Parsistence.CommonServices;
+using HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
+using HRApplication.Persistence.Repositories;
+using HRApplication.Persistence.Repositories.CommonServices;
+using HRApplication.Persistence.Repositories.EmployeeManagement;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +21,13 @@ public static class PersistenceServicesRegistration
     {
         services.AddDbContext<HRApplicationDBContext>(options =>
                     options.UseSqlServer(configuration.GetConnectionString("HRApplicationConnectionString")));
+
+
+        services.AddScoped<IUnitofWork, UnitofWork>();
+
+        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+        services.AddScoped<IEmployeeBasicInfoRepository, EmployeeBasicInfoRepository>();
 
         return services;
     }

@@ -3,13 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using HRApplication.Domain.MasterConfiguratio;
 
 namespace HRApplication.Persistence.DomainConfiguration.MasterConfiguration;
-public class TblAccountInfoConfiguration : IEntityTypeConfiguration<TblAccountInfo>
+public class TblAccountInfoConfiguration : IEntityTypeConfiguration<AccountInformation>
 {
-    public void Configure(EntityTypeBuilder<TblAccountInfo> builder)
+    public void Configure(EntityTypeBuilder<AccountInformation> builder)
     {
+        builder.ToTable("AccountInformation", "base");
 
-        builder.ToTable("TblAccountInfo", "base");
+        // Configure the primary key
+        builder.HasKey(e => e.IntAccountId);
 
+        // Configure the primary key property as an identity column
+        builder.Property(e => e.IntAccountId)
+            .ValueGeneratedOnAdd();
+
+        // Configure other properties
         builder.Property(e => e.StrAccountName)
             .HasMaxLength(100);
     }

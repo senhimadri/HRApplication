@@ -7,10 +7,10 @@ namespace HRApplication.Persistence.Repositories.CommonServices;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEntity
 {
-    private readonly DbContext _context;
+    private readonly HRApplicationDBContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(DbContext context) => (_context, _dbSet)=(context, context.Set<T>());
+    public GenericRepository(HRApplicationDBContext context) => (_context, _dbSet)=(context, context.Set<T>());
 
     public async Task<T?> GetOne(long intPrimaryId)
     {

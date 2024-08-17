@@ -3,7 +3,7 @@ using HRApplication.Domain.EmployeeManagement;
 
 namespace HRApplication.Domain.LeaveManagement;
 
-public class TblLeaveBalance: MasterConfigEntiy
+public class TblLeaveBalance: BaseDomainEntity
 {
     public long IntEmployeeId { get; set; }
     public TblEmployeeBasicInfo? TblEmployeeBasicInfo { get; set; }

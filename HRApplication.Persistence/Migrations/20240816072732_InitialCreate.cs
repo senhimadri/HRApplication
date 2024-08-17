@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HRApplication.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class First_Script : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,24 +23,18 @@ namespace HRApplication.Persistence.Migrations
                 name: "lev");
 
             migrationBuilder.CreateTable(
-                name: "TblAccountInfo",
+                name: "AccountInformation",
                 schema: "base",
                 columns: table => new
                 {
-                    IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    StrAccountName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrAccountDescreption = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    StrAccountName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StrAccountDescreption = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblAccountInfo", x => x.IntPrimaryId);
+                    table.PrimaryKey("PK_AccountInformation", x => x.IntAccountId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,13 +44,14 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrDepartmentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrDepartmentCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StrDepartmentName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StrDepartmentCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,13 +65,14 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrDesignationName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrDesignationCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StrDesignationName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StrDesignationCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,13 +86,14 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrGenderName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrGenderCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StrGenderName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StrGenderCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -110,13 +107,14 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrLeaveTypeName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    StrLeaveTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StrLeaveTypeName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    StrLeaveTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,44 +128,18 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrReligionName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    StrReligionCode = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: false),
+                    StrReligionName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    StrReligionCode = table.Column<string>(type: "nvarchar(1)", maxLength: 1, nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TblReligionInfo", x => x.IntPrimaryId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TblBusinessUnitInfo",
-                schema: "base",
-                columns: table => new
-                {
-                    IntPrimaryId = table.Column<long>(type: "bigint", nullable: false),
-                    StrBusinessUnitName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrBusinessUnitDescreption = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IntAccountId = table.Column<long>(type: "bigint", nullable: false),
-                    IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblBusinessUnitInfo", x => x.IntPrimaryId);
-                    table.ForeignKey(
-                        name: "FK_TblBusinessUnitInfo_TblAccountInfo_IntPrimaryId",
-                        column: x => x.IntPrimaryId,
-                        principalSchema: "base",
-                        principalTable: "TblAccountInfo",
-                        principalColumn: "IntPrimaryId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -177,8 +149,8 @@ namespace HRApplication.Persistence.Migrations
                 {
                     IntPrimaryId = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    StrEmployeeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrEmployeeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    StrEmployeeName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StrEmployeeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     DteDateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IntDepartmentId = table.Column<long>(type: "bigint", nullable: false),
                     IntDesignationId = table.Column<long>(type: "bigint", nullable: false),
@@ -189,10 +161,7 @@ namespace HRApplication.Persistence.Migrations
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IntAccountId = table.Column<long>(type: "bigint", nullable: false),
-                    IntBusinessUnitId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkplaceGroupId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkPlaceId = table.Column<long>(type: "bigint", nullable: false)
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -228,33 +197,6 @@ namespace HRApplication.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TblWorkplaceGroupInfo",
-                schema: "base",
-                columns: table => new
-                {
-                    IntPrimaryId = table.Column<long>(type: "bigint", nullable: false),
-                    StrWorkplaceGroupName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrWorkplaceGroupDescreption = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IntBusinessUnitId = table.Column<long>(type: "bigint", nullable: false),
-                    IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblWorkplaceGroupInfo", x => x.IntPrimaryId);
-                    table.ForeignKey(
-                        name: "FK_TblWorkplaceGroupInfo_TblBusinessUnitInfo_IntPrimaryId",
-                        column: x => x.IntPrimaryId,
-                        principalSchema: "base",
-                        principalTable: "TblBusinessUnitInfo",
-                        principalColumn: "IntPrimaryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TblLeaveApplication",
                 schema: "lev",
                 columns: table => new
@@ -266,16 +208,13 @@ namespace HRApplication.Persistence.Migrations
                     DteApplicationDate = table.Column<DateOnly>(type: "date", nullable: false),
                     DteFromDate = table.Column<DateOnly>(type: "date", nullable: false),
                     DteToDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    StrLeaveReason = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    StrLeaveReason = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IntAccountId = table.Column<long>(type: "bigint", nullable: false),
-                    IntBusinessUnitId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkplaceGroupId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkPlaceId = table.Column<long>(type: "bigint", nullable: false)
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -314,10 +253,7 @@ namespace HRApplication.Persistence.Migrations
                     IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
                     DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    IntAccountId = table.Column<long>(type: "bigint", nullable: false),
-                    IntBusinessUnitId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkplaceGroupId = table.Column<long>(type: "bigint", nullable: false),
-                    IntWorkPlaceId = table.Column<long>(type: "bigint", nullable: false)
+                    IntAccountId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -338,71 +274,44 @@ namespace HRApplication.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TblWorkplaceInfo",
-                schema: "base",
-                columns: table => new
-                {
-                    IntPrimaryId = table.Column<long>(type: "bigint", nullable: false),
-                    StrWorkplaceName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    StrWorkplaceDescreption = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IntWorkplaceGroupId = table.Column<long>(type: "bigint", nullable: false),
-                    IntCreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteCtratedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IntUpdatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    DteUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TblWorkplaceInfo", x => x.IntPrimaryId);
-                    table.ForeignKey(
-                        name: "FK_TblWorkplaceInfo_TblWorkplaceGroupInfo_IntPrimaryId",
-                        column: x => x.IntPrimaryId,
-                        principalSchema: "base",
-                        principalTable: "TblWorkplaceGroupInfo",
-                        principalColumn: "IntPrimaryId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 schema: "emp",
                 table: "TblDepartmentInfo",
-                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrDepartmentCode", "StrDepartmentName" },
-                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "ADM001", "Administration" });
+                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntAccountId", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrDepartmentCode", "StrDepartmentName" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "ADM001", "Administration" });
 
             migrationBuilder.InsertData(
                 schema: "emp",
                 table: "TblDesignationInfo",
-                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrDesignationCode", "StrDesignationName" },
-                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "ADM001", "Admin" });
+                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntAccountId", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrDesignationCode", "StrDesignationName" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "ADM001", "Admin" });
 
             migrationBuilder.InsertData(
                 schema: "emp",
                 table: "TblGenderInfo",
-                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrGenderCode", "StrGenderName" },
+                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntAccountId", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrGenderCode", "StrGenderName" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "M", "Male" },
-                    { 2L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "F", "Female" },
-                    { 3L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "O", "Others" }
+                    { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "M", "Male" },
+                    { 2L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "F", "Female" },
+                    { 3L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "O", "Others" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "lev",
                 table: "TblLeaveTypeInfo",
-                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrLeaveTypeCode", "StrLeaveTypeName" },
+                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntAccountId", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrLeaveTypeCode", "StrLeaveTypeName" },
                 values: new object[,]
                 {
-                    { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "CA001", "Casual Leave" },
-                    { 2L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "SCK002", "Sick Leave" }
+                    { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "CA001", "Casual Leave" },
+                    { 2L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "SCK002", "Sick Leave" }
                 });
 
             migrationBuilder.InsertData(
                 schema: "emp",
                 table: "TblReligionInfo",
-                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrReligionCode", "StrReligionName" },
-                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, false, "O", "Others" });
+                columns: new[] { "IntPrimaryId", "DteCtratedAt", "DteUpdatedAt", "IntAccountId", "IntCreatedBy", "IntUpdatedBy", "IsActive", "StrReligionCode", "StrReligionName" },
+                values: new object[] { 1L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 0L, 0L, 0L, false, "O", "Others" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblEmployeeBasicInfo_IntDepartmentId",
@@ -457,6 +366,10 @@ namespace HRApplication.Persistence.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AccountInformation",
+                schema: "base");
+
+            migrationBuilder.DropTable(
                 name: "TblLeaveApplication",
                 schema: "lev");
 
@@ -465,20 +378,12 @@ namespace HRApplication.Persistence.Migrations
                 schema: "lev");
 
             migrationBuilder.DropTable(
-                name: "TblWorkplaceInfo",
-                schema: "base");
-
-            migrationBuilder.DropTable(
                 name: "TblEmployeeBasicInfo",
                 schema: "emp");
 
             migrationBuilder.DropTable(
                 name: "TblLeaveTypeInfo",
                 schema: "lev");
-
-            migrationBuilder.DropTable(
-                name: "TblWorkplaceGroupInfo",
-                schema: "base");
 
             migrationBuilder.DropTable(
                 name: "TblDepartmentInfo",
@@ -495,14 +400,6 @@ namespace HRApplication.Persistence.Migrations
             migrationBuilder.DropTable(
                 name: "TblReligionInfo",
                 schema: "emp");
-
-            migrationBuilder.DropTable(
-                name: "TblBusinessUnitInfo",
-                schema: "base");
-
-            migrationBuilder.DropTable(
-                name: "TblAccountInfo",
-                schema: "base");
         }
     }
 }

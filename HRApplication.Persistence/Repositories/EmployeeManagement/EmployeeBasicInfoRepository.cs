@@ -7,6 +7,6 @@ namespace HRApplication.Persistence.Repositories.EmployeeManagement;
 
 public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInfo> , IEmployeeBasicInfoRepository
 {
-    private readonly DbContext _dbContext;
-	public EmployeeBasicInfoRepository(DbContext dbContext) : base(dbContext) => _dbContext = dbContext;
+    private readonly HRApplicationDBContext _dbContext;
+	public EmployeeBasicInfoRepository(HRApplicationDBContext dbContext) : base(dbContext) => _dbContext = dbContext;
 }

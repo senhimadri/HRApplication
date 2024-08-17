@@ -1,5 +1,5 @@
 ﻿namespace HRApplication.Domain.CommonDomain;
-public abstract class BaseDomainEntity
+public class BaseDomainEntity
 {
     public long IntPrimaryId { get; set; }
     public long IntCreatedBy { get; set; }
@@ -7,6 +7,7 @@ public abstract class BaseDomainEntity
     public long IntUpdatedBy { get; set; }
     public DateTime  DteUpdatedAt { get; set; }
     public bool IsActive { get; set; }
+    public long IntAccountId { get; set; }
 }
 
 

@@ -8,7 +8,6 @@ namespace HRApplication.Persistence;
 
 public class HRApplicationDBContext: DbContext
 {
-
     public HRApplicationDBContext(DbContextOptions<HRApplicationDBContext> options) : base(options)
     {
 
@@ -36,6 +35,7 @@ public class HRApplicationDBContext: DbContext
     {
         foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
         {
+            entity.Entity.IntAccountId=1;
             if (entity.State == EntityState.Added)
             {
                 entity.Entity.DteCtratedAt = DateTime.UtcNow;
@@ -65,11 +65,9 @@ public class HRApplicationDBContext: DbContext
     public DbSet<TblLeaveApplication> TblLeaveApplication { get; set; }
     public DbSet<TblLeaveBalance> TblLeaveBalance { get; set; }
 
-    // Master Configuration
-    public DbSet<TblAccountInfo> TblAccountInfo { get; set; }
-    public DbSet<TblBusinessUnitInfo> TblBusinessUnitInfo { get; set; }
-    public DbSet<TblWorkplaceGroupInfo> TblWorkplaceGroupInfo { get; set; }
-    public DbSet<TblWorkplaceInfo> TblWorkplaceInfo { get; set; }
+    public DbSet<AccountInformation> AccountInformation { get; set; }
+
+
 
 }
 

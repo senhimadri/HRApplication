@@ -1,5 +1,4 @@
 ﻿using HRApplication.Domain.CommonDomain;
-using System.Collections.ObjectModel;
 
 namespace HRApplication.Domain.EmployeeManagement;
 

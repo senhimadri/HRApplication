@@ -1,19 +1,15 @@
 using HRApplication.Application.Contracts.Parsistence;
-using HRApplication.Application.DataTransferObjects.LeaveManagement;
-using HRApplication.Application.DataTransferObjects.LeaveManagement.Validator;
-using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.Requests;
+using HRApplication.Application.Exceptions;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
-using HRApplication.Domain.EmployeeManagement;
 using MediatR;
-using System.IO.MemoryMappedFiles;
 
-namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.Handlers;
+namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
 
 public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmployeeBasicInfoCommand, long>
 {
     private readonly IUnitofWork _unitofWork;
 
-    public CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) 
+    public CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork)
                                         => _unitofWork = unitofWork;
 
     public async Task<long> Handle(CreateEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
@@ -22,7 +18,7 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
         var validationResult = await validator.ValidateAsync(request.employeeBasicInfo);
 
         if (!validationResult.IsValid)
-            throw new Exception(validationResult.ToString());
+            throw new ValidationException(validationResult);
 
         var employeeBasicInfo = EmployeeBasicInfoMap.mapper(request.employeeBasicInfo);
 
