@@ -25,19 +25,17 @@ public class EmployeeBasicInfoController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult> GetEmployeesList(   
-                                                    string? SearchText ,
-                                                    long DepartmentId ,
-                                                    long DesignationId ,
-                                                    long GenderId ,
-                                                    long ReligionId )
+    public async Task<ActionResult> GetEmployeesList(string? SearchText,                                                       long DepartmentId ,
+                                                        long DesignationId ,
+                                                        long GenderId ,
+                                                        long ReligionId)
     {
         var request = new GetEmployeesBasicInfoListRequest { 
-                                                SearchText=SearchText,
-                                                DepartmentId=DepartmentId,
-                                                DesignationId=DesignationId,
-                                                GenderId=GenderId,
-                                                ReligionId=ReligionId
+                                                            SearchText=SearchText,
+                                                            DepartmentId=DepartmentId,
+                                                            DesignationId=DesignationId,
+                                                            GenderId=GenderId,
+                                                            ReligionId=ReligionId
                                                 };
         var response = await _mediator.Send(request);
         return Ok(response);

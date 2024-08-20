@@ -14,14 +14,20 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
 
     public async Task<List<TblEmployeeBasicInfo>> GetEmployeeDetailsList(Expression<Func<TblEmployeeBasicInfo, bool>> filter)
     {
-        var employeeDetails = await _dbContext.TblEmployeeBasicInfo
+        var employeeDetails = await GetEmployeeDetailsQuery(filter)
+                                    .ToListAsync();
+        return employeeDetails;
+    }
+
+    public IQueryable<TblEmployeeBasicInfo> GetEmployeeDetailsQuery(Expression<Func<TblEmployeeBasicInfo, bool>> filter)
+    {
+        var employeeDetailsQuery = _dbContext.TblEmployeeBasicInfo
                                     .Include(x => x.TblDepartmentInfo)
                                     .Include(x => x.TblDesignationInfo)
                                     .Include(x => x.TblGenderInfo)
                                     .Include(x => x.TblReligionInfo)
-                                    .Where(filter)
-                                    .ToListAsync();
-        return employeeDetails;
+                                    .Where(filter);
+        return employeeDetailsQuery;
     }
 
 
