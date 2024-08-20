@@ -7,6 +7,5 @@ namespace HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
 public interface IEmployeeBasicInfoRepository : IGenericRepository<TblEmployeeBasicInfo>
 {
     public Task<List<TblEmployeeBasicInfo>> GetEmployeeDetailsList(Expression<Func<TblEmployeeBasicInfo, bool>> filter);
-
 }
 

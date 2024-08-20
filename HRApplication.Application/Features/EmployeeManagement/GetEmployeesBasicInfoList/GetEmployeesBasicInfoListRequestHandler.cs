@@ -14,6 +14,7 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
 
     public async Task<List<GetEmployeeBasicInfoDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
+        
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetEmployeeDetailsList(x => request.DepartmentId == 0 || x.IntDepartmentId ==request.DepartmentId);
 
