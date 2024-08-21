@@ -8,5 +8,6 @@ public interface IEmployeeBasicInfoRepository : IGenericRepository<TblEmployeeBa
 {
     public IQueryable<TblEmployeeBasicInfo> GetEmployeeDetailsQuery(Expression<Func<TblEmployeeBasicInfo, bool>> filter);
     public Task<List<TblEmployeeBasicInfo>> GetEmployeeDetailsList(Expression<Func<TblEmployeeBasicInfo, bool>> filter);
+    public Task<TblEmployeeBasicInfo?> GetEmployeeDetailsbyId(long EmployeeId);
 }
 

@@ -10,13 +10,13 @@ public static class EmployeeBasicInfoMap
     {
         return new TblEmployeeBasicInfo()
         {
-            StrEmployeeName =data.StrEmployeeName,
-            StrEmployeeCode =data.StrEmployeeCode,
-            DteDateOfBirth =data.DteDateOfBirth,
-            IntDepartmentId =data.IntDepartmentId,
-            IntDesignationId =data.IntDesignationId,
-            IntGenderId =data.IntGenderId,
-            IntReligionId =data.IntReligionId
+            StrEmployeeName =data.EmployeeName,
+            StrEmployeeCode =data.EmployeeCode,
+            DteDateOfBirth =data.DateOfBirth,
+            IntDepartmentId =data.DepartmentId,
+            IntDesignationId =data.DesignationId,
+            IntGenderId =data.GenderId,
+            IntReligionId =data.ReligionId
         };
     }
 
@@ -24,14 +24,14 @@ public static class EmployeeBasicInfoMap
     {
         return new GetEmployeeBasicInfoDto()
         {
-            IntPrimaryId = data.IntReligionId,
-            StrEmployeeName = data.StrEmployeeName,
-            StrEmployeeCode =data.StrEmployeeCode,
-            DteDateOfBirth = data.DteDateOfBirth,
-            StrDepartment = data.TblDepartmentInfo?.StrDepartmentName,
-            StrDesignation = data.TblDesignationInfo?.StrDesignationName,
-            StrGender = data.TblGenderInfo?.StrGenderName,
-            StrReligionId = data.TblReligionInfo?.StrReligionName
+            PrimaryId = data.IntReligionId,
+            EmployeeName = data.StrEmployeeName,
+            EmployeeCode =data.StrEmployeeCode,
+            DateOfBirth = data.DteDateOfBirth,
+            Department = data.TblDepartmentInfo?.StrDepartmentName,
+            Designation = data.TblDesignationInfo?.StrDesignationName,
+            Gender = data.TblGenderInfo?.StrGenderName,
+            Religion = data.TblReligionInfo?.StrReligionName
         };
     }
 
@@ -39,14 +39,14 @@ public static class EmployeeBasicInfoMap
     {
         return data.Select(x=> new GetEmployeeBasicInfoDto
         {
-            IntPrimaryId = x.IntReligionId,
-            StrEmployeeName = x.StrEmployeeName,
-            StrEmployeeCode =x.StrEmployeeCode,
-            DteDateOfBirth = x.DteDateOfBirth,
-            StrDepartment = (x.TblDepartmentInfo?.StrDepartmentName),
-            StrDesignation = x.TblDesignationInfo?.StrDesignationName,
-            StrGender = x.TblGenderInfo?.StrGenderName,
-            StrReligionId = x.TblReligionInfo?.StrReligionName
+            PrimaryId = x.IntReligionId,
+            EmployeeName = x.StrEmployeeName,
+            EmployeeCode =x.StrEmployeeCode,
+            DateOfBirth = x.DteDateOfBirth,
+            Department = (x.TblDepartmentInfo?.StrDepartmentName),
+            Designation = x.TblDesignationInfo?.StrDesignationName,
+            Gender = x.TblGenderInfo?.StrGenderName,
+            Religion = x.TblReligionInfo?.StrReligionName
         }).ToList();
     }
 }

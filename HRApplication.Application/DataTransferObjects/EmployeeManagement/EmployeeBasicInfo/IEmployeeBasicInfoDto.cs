@@ -1,8 +1,6 @@
-using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
+﻿namespace HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 
-namespace HRApplication.Application.DataTransferObjects.LeaveManagement;
-
-public class CreateEmployeeBasicInfoDto  : IEmployeeBasicInfoDto
+public interface IEmployeeBasicInfoDto
 {
     public string? EmployeeName { get; set; }
     public string? EmployeeCode { get; set; }
@@ -12,4 +10,3 @@ public class CreateEmployeeBasicInfoDto  : IEmployeeBasicInfoDto
     public long GenderId { get; set; }
     public long ReligionId { get; set; }
 }
-
