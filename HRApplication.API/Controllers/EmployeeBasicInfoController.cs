@@ -1,7 +1,8 @@
 ﻿using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
-using HRApplication.Application.Features.EmployeeManagement.GetEmployeesBasicInfoList;
+using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeeBasicInfoDetailsById;
+using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,17 +27,19 @@ public class EmployeeBasicInfoController : ControllerBase
 
     [HttpPost]
     [Route("LandingEmployeesList")]
-    public async Task<ActionResult> LandingEmployeesList (ParamsEmployeeBasicInfoLandingDto _LandingParameeter)
+    public async Task<ActionResult> LandingEmployeesList (ParamsEmployeeBasicInfoLandingDto _landingParameeter)
     {
-        var request = new GetEmployeesBasicInfoListRequest { LandingParameeter= _LandingParameeter};
+        var request = new GetEmployeesBasicInfoListRequest { LandingParameeter= _landingParameeter };
         var response = await _mediator.Send(request);
         return Ok(response);
     }
 
     [HttpGet]
     [Route("GetEmployeeDetails")]
-    public async Task<ActionResult> GetEmployeeDetails (long _employeeId)
+    public async Task<ActionResult> GetEmployeeDetailsById(long _employeeId)
     {
-        return Ok();
+        var request = new GetEmployeeBasicInfoDetailsByIdRequest { EmployeeId = _employeeId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
     }
 }

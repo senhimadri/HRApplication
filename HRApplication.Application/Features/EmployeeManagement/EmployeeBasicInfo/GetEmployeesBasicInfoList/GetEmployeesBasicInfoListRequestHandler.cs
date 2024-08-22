@@ -28,7 +28,7 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
 
     private Expression<Func<TblEmployeeBasicInfo, bool>> GetFilter(GetEmployeesBasicInfoListRequest request)
     {
-        Func<TblEmployeeBasicInfo, bool> SearchTextFilter = x => request.LandingParameeter?.SearchText is not null ?
+        Func<TblEmployeeBasicInfo, bool> SearchTextFilter = x => !String.IsNullOrEmpty(request.LandingParameeter?.SearchText) ?
                                                                 (x.StrEmployeeName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                     || (x.StrEmployeeCode ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                     || (x.TblDepartmentInfo?.StrDepartmentName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
@@ -37,24 +37,29 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
                                                                     || (x.TblGenderInfo?.StrGenderName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                 : true;
 
-        Func<TblEmployeeBasicInfo, bool> SearchDepartment = x => request.LandingParameeter?.DepartmentIdList is not null ?
-                                                                    request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId)
+        Func<TblEmployeeBasicInfo, bool> SearchDepartment = x => request.LandingParameeter?.DepartmentIdList is not null 
+                                                                        && request.LandingParameeter.DepartmentIdList.Any()
+                                                                    ? request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId)
                                                                 : true;
 
-        Func<TblEmployeeBasicInfo, bool> SearchDesignation = x => request.LandingParameeter?.DesignationIdList is not null ?
-                                                                    request.LandingParameeter.DesignationIdList.Contains(x.IntDepartmentId)
+        Func<TblEmployeeBasicInfo, bool> SearchDesignation = x => request.LandingParameeter?.DesignationIdList is not null
+                                                                    && request.LandingParameeter.DesignationIdList.Any()
+                                                                ? request.LandingParameeter.DesignationIdList.Contains(x.IntDesignationId)
                                                                 : true;
 
-        Func<TblEmployeeBasicInfo, bool> SearchGender = x => request.LandingParameeter?.GenderIdList is not null ?
-                                                                    request.LandingParameeter.GenderIdList.Contains(x.IntDepartmentId)
+        Func<TblEmployeeBasicInfo, bool> SearchGender = x => request.LandingParameeter?.GenderIdList is not null
+                                                                        && request.LandingParameeter.GenderIdList.Any() 
+                                                                        ? request.LandingParameeter.GenderIdList.Contains(x.IntGenderId)
                                                                 : true;
 
-        Func<TblEmployeeBasicInfo, bool> SearchReligion = x => request.LandingParameeter?.GenderIdList is not null ?
-                                                                    request.LandingParameeter.GenderIdList.Contains(x.IntDepartmentId)
+        Func<TblEmployeeBasicInfo, bool> SearchReligion = x => request.LandingParameeter?.ReligionIdList is not null
+                                                                 && request.LandingParameeter.ReligionIdList.Any()
+                                                                    ? request.LandingParameeter.ReligionIdList.Contains(x.IntReligionId)
                                                                 : true;
 
         Expression<Func<TblEmployeeBasicInfo, bool>> filter = x => SearchTextFilter(x) && SearchDepartment(x) &&
                                                                     SearchDesignation(x) && SearchGender(x) && SearchReligion(x);
+
         return filter;
     }
 
