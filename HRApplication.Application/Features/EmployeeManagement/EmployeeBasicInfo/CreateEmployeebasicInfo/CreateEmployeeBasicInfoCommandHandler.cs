@@ -20,7 +20,7 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult);
 
-        var employeeBasicInfo = EmployeeBasicInfoMap.mapper(request.employeeBasicInfo);
+        var employeeBasicInfo = EmployeeBasicInfoMap.CreateEmployee(request.employeeBasicInfo);
 
         employeeBasicInfo = await _unitofWork.EmployeeBasicInfoRepository.InsertOne(employeeBasicInfo);
 

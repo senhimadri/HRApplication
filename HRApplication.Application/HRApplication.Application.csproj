@@ -15,4 +15,8 @@
     <ProjectReference Include="..\HRApplication.Domain\HRApplication.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\EmployeeManagement\EmployeeBasicInfo\DeleteEmployeeBasicInfo\" />
+  </ItemGroup>
+
 </Project>

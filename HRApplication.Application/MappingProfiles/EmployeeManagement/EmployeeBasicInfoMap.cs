@@ -1,15 +1,30 @@
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Domain.EmployeeManagement;
-using System.Security.AccessControl;
 
 namespace HRApplication.Application.MappingProfiles.EmployeeManagement;
 
 public static class EmployeeBasicInfoMap
 {
-    public static TblEmployeeBasicInfo mapper(CreateEmployeeBasicInfoDto data)
+    public static TblEmployeeBasicInfo CreateEmployee(CreateEmployeeBasicInfoDto data)
     {
         return new TblEmployeeBasicInfo()
         {
+
+            StrEmployeeName =data.EmployeeName,
+            StrEmployeeCode =data.EmployeeCode,
+            DteDateOfBirth =data.DateOfBirth,
+            IntDepartmentId =data.DepartmentId,
+            IntDesignationId =data.DesignationId,
+            IntGenderId =data.GenderId,
+            IntReligionId =data.ReligionId
+        };
+    }
+
+    public static TblEmployeeBasicInfo UpdateEmployee(UpdateEmployeeBasicInfoDto data)
+    {
+        return new TblEmployeeBasicInfo()
+        {
+            IntPrimaryId = data.PrimaryId,
             StrEmployeeName =data.EmployeeName,
             StrEmployeeCode =data.EmployeeCode,
             DteDateOfBirth =data.DateOfBirth,
