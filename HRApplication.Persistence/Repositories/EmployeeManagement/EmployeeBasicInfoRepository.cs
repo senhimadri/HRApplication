@@ -32,7 +32,7 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
                                         .Include(x => x.TblDesignationInfo)
                                         .Include(x => x.TblGenderInfo)
                                         .Include(x => x.TblReligionInfo)
-                                    .Where(filter);
+                                   .Where(filter);
         return employeeDetailsQuery;
     }
 

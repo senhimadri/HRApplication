@@ -24,13 +24,21 @@ public static class EmployeeBasicInfoMap
     {
         return new GetEmployeeBasicInfoDto()
         {
-            PrimaryId = data.IntReligionId,
+            PrimaryId = data.IntPrimaryId,
             EmployeeName = data.StrEmployeeName,
             EmployeeCode =data.StrEmployeeCode,
             DateOfBirth = data.DteDateOfBirth,
+
+            DepartmentId = data.IntDepartmentId,
             Department = data.TblDepartmentInfo?.StrDepartmentName,
+
+            DesignationId = data.IntDesignationId,
             Designation = data.TblDesignationInfo?.StrDesignationName,
+
+            GenderId = data.IntGenderId,
             Gender = data.TblGenderInfo?.StrGenderName,
+
+            ReligionId = data.IntReligionId,
             Religion = data.TblReligionInfo?.StrReligionName
         };
     }

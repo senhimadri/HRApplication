@@ -5,13 +5,13 @@ using HRApplication.Domain.EmployeeManagement;
 using MediatR;
 using System.Linq.Expressions;
 
-namespace HRApplication.Application.Features.EmployeeManagement.GetEmployeesBasicInfoList;
+namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
 public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, List<GetEmployeeBasicInfoDto>>
 {
     private readonly IUnitofWork _unitofWork;
 
-    public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork=unitofWork;
+    public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
 
     public async Task<List<GetEmployeeBasicInfoDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
@@ -29,16 +29,16 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
     private Expression<Func<TblEmployeeBasicInfo, bool>> GetFilter(GetEmployeesBasicInfoListRequest request)
     {
         Func<TblEmployeeBasicInfo, bool> SearchTextFilter = x => request.LandingParameeter?.SearchText is not null ?
-                                                                ((x.StrEmployeeName??string.Empty).Contains(request.LandingParameeter.SearchText)
-                                                                    || (x.StrEmployeeCode??string.Empty).Contains(request.LandingParameeter.SearchText)
+                                                                (x.StrEmployeeName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
+                                                                    || (x.StrEmployeeCode ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                     || (x.TblDepartmentInfo?.StrDepartmentName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                     || (x.TblDesignationInfo?.StrDesignationName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                     || (x.TblReligionInfo?.StrReligionName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
-                                                                    || (x.TblGenderInfo?.StrGenderName ?? string.Empty).Contains(request.LandingParameeter.SearchText))
+                                                                    || (x.TblGenderInfo?.StrGenderName ?? string.Empty).Contains(request.LandingParameeter.SearchText)
                                                                 : true;
 
         Func<TblEmployeeBasicInfo, bool> SearchDepartment = x => request.LandingParameeter?.DepartmentIdList is not null ?
-                                                                    request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId) 
+                                                                    request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId)
                                                                 : true;
 
         Func<TblEmployeeBasicInfo, bool> SearchDesignation = x => request.LandingParameeter?.DesignationIdList is not null ?
