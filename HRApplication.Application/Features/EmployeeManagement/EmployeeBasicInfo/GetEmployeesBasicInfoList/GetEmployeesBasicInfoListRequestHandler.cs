@@ -43,17 +43,17 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
                                                                 : true;
 
         Func<TblEmployeeBasicInfo, bool> SearchDesignation = x => request.LandingParameeter?.DesignationIdList is not null
-                                                                    && request.LandingParameeter.DesignationIdList.Any()
-                                                                ? request.LandingParameeter.DesignationIdList.Contains(x.IntDesignationId)
+                                                                        && request.LandingParameeter.DesignationIdList.Any()
+                                                                    ? request.LandingParameeter.DesignationIdList.Contains(x.IntDesignationId)
                                                                 : true;
 
         Func<TblEmployeeBasicInfo, bool> SearchGender = x => request.LandingParameeter?.GenderIdList is not null
                                                                         && request.LandingParameeter.GenderIdList.Any() 
-                                                                        ? request.LandingParameeter.GenderIdList.Contains(x.IntGenderId)
+                                                                    ? request.LandingParameeter.GenderIdList.Contains(x.IntGenderId)
                                                                 : true;
 
         Func<TblEmployeeBasicInfo, bool> SearchReligion = x => request.LandingParameeter?.ReligionIdList is not null
-                                                                 && request.LandingParameeter.ReligionIdList.Any()
+                                                                        && request.LandingParameeter.ReligionIdList.Any()
                                                                     ? request.LandingParameeter.ReligionIdList.Contains(x.IntReligionId)
                                                                 : true;
 
