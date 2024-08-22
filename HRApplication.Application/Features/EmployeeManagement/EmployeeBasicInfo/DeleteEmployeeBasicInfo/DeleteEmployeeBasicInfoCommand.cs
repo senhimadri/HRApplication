@@ -1,7 +1,8 @@
-namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo
+using MediatR;
+
+namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
+
+public class DeleteEmployeeBasicInfoCommand  : IRequest<Unit>
 {
-    public class DeleteEmployeeBasicInfoCommand
-    {
-        // Class implementation
-    }
+    public long EmployeeId { get; set; }
 }

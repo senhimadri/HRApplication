@@ -65,11 +65,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
     public async Task InActiveOne(long IntPrimaryId)
     {
         var entity = await GetOne(IntPrimaryId);
-        if (entity is not null)
-        {
-            entity.IsActive = false;
-            await ModifyOne(entity);
-        }
+        if (entity is null)
+            throw new NullReferenceException();
+
+        entity.IsActive = false;
+        await ModifyOne(entity);
     }
 
     public async Task InActiveMany(Expression<Func<T, bool>> filter)

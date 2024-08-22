@@ -1,6 +1,7 @@
 ﻿using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
+using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeeBasicInfoDetailsById;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.UpdateEmployeeBasicInfo;
@@ -31,6 +32,15 @@ public class EmployeeBasicInfoController : ControllerBase
     public async Task<ActionResult> UpdateEmployeeBasicInfo([FromBody] UpdateEmployeeBasicInfoDto _employeeBasicInfo)
     {
         var command = new UpdateEmployeeBasicInfoCommand { employeeBasicInfo = _employeeBasicInfo };
+        var response = await _mediator.Send(command);
+        return Ok(response);
+    }
+
+    [HttpDelete]
+    [Route("DeleteEmployeeBasicInfo")]
+    public async Task<ActionResult> DeleteEmployeeBasicInfo(long _employeeId)
+    {
+        var command = new DeleteEmployeeBasicInfoCommand { EmployeeId = _employeeId };
         var response = await _mediator.Send(command);
         return Ok(response);
     }
