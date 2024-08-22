@@ -1,4 +1,3 @@
-using HRApplication.Application.DataTransferObjects.CommonDTO;
 using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using MediatR;
