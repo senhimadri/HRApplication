@@ -8,14 +8,14 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, List<GetEmployeeBasicInfoDto>>
+public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, List<GetEmployeeBasicInfoLandingDto>>
 {
     private readonly IUnitofWork _unitofWork;
 
     public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
 
-    public async Task<List<GetEmployeeBasicInfoDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
+    public async Task<List<GetEmployeeBasicInfoLandingDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
 
         var Filter = GetFilter(request);

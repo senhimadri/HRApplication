@@ -4,7 +4,7 @@ using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequest : IRequest<List<GetEmployeeBasicInfoDto>>
+public class GetEmployeesBasicInfoListRequest : IRequest<List<GetEmployeeBasicInfoLandingDto>>
 {
     public ParamsEmployeeBasicInfoLandingDto? LandingParameeter { get; set; }
 }

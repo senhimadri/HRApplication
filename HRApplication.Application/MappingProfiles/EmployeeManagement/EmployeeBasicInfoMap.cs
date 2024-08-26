@@ -58,11 +58,11 @@ public static class EmployeeBasicInfoMap
         };
     }
 
-    public static List<GetEmployeeBasicInfoDto> GetEmployeeList(IList<TblEmployeeBasicInfo> data)
+    public static List<GetEmployeeBasicInfoLandingDto> GetEmployeeList(IList<TblEmployeeBasicInfo> data)
     {
-        return data.Select(x=> new GetEmployeeBasicInfoDto
+        var map =  data.Select(x=> new GetEmployeeBasicInfoLandingDto
         {
-            PrimaryId = x.IntReligionId,
+            PrimaryId = x.IntPrimaryId,
             EmployeeName = x.StrEmployeeName,
             EmployeeCode =x.StrEmployeeCode,
             DateOfBirth = x.DteDateOfBirth,
@@ -71,5 +71,7 @@ public static class EmployeeBasicInfoMap
             Gender = x.TblGenderInfo?.StrGenderName,
             Religion = x.TblReligionInfo?.StrReligionName
         }).ToList();
+
+        return map;
     }
 }
