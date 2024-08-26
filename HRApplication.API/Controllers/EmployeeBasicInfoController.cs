@@ -55,7 +55,7 @@ public class EmployeeBasicInfoController : ControllerBase
     }
 
     [HttpGet]
-    [Route("GetEmployeeDetails")]
+    [Route("GetEmployeeDetailsById")]
     public async Task<ActionResult> GetEmployeeDetailsById(long _employeeId)
     {
         var request = new GetEmployeeBasicInfoDetailsByIdRequest { EmployeeId = _employeeId };

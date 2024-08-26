@@ -3,6 +3,7 @@ using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveManagement;
 using HRApplication.Domain.MasterConfiguratio;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace HRApplication.Persistence;
 
@@ -28,6 +29,19 @@ public class HRApplicationDBContext: DbContext
             modelBuilder.Entity(entityType.ClrType)
                 .Property("IntPrimaryId")
                 .ValueGeneratedOnAdd();
+
+            // Apply global query filter for IsDeleted property
+            if (entityType.ClrType.GetProperty("IsActive") != null)
+            {
+                var parameter = Expression.Parameter(entityType.ClrType, "e");
+                var property = Expression.Property(parameter, "IsActive");
+                var constant = Expression.Constant(true);
+                var body = Expression.Equal(property, constant);
+                var lambda = Expression.Lambda(body, parameter);
+
+                modelBuilder.Entity(entityType.ClrType)
+                    .HasQueryFilter(lambda);
+            }
         }
     }
 
