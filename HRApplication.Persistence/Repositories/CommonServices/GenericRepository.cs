@@ -83,9 +83,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
         }
     }
 
-    public async Task<bool> IsExist(long PrimaryId)
+    public async Task<bool> IsExist(Expression<Func<T, bool>> filter)
     {
-        return await _dbSet.AnyAsync(e => e.IntPrimaryId == PrimaryId);
+        return await _dbSet.AnyAsync(filter);
     }
 
     public async Task<long> GetCount(Expression<Func<T, bool>> filter)

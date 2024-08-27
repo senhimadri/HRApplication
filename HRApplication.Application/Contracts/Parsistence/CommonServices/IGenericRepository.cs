@@ -19,6 +19,6 @@ public interface IGenericRepository<T> where T : class
     Task InActiveOne(long IntPrimaryId);
     Task InActiveMany(Expression<Func<T, bool>> filter);
 
-    Task<bool> IsExist (long PrimaryId);
+    Task<bool> IsExist (Expression<Func<T, bool>> filter);
     Task<long> GetCount(Expression<Func<T, bool>> filter);
 }
