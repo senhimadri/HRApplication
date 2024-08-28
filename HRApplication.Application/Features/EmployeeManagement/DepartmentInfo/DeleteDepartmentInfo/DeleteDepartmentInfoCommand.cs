@@ -1,7 +1,8 @@
-namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.DeleteDepartmentInfo
+using MediatR;
+
+namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.DeleteDepartmentInfo;
+
+public class DeleteDepartmentInfoCommand : IRequest<Unit>
 {
-    public class DeleteDepartmentInfoCommand
-    {
-        // Class implementation
-    }
+    public long PrimaryId { get; set; }
 }
