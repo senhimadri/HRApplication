@@ -6,7 +6,7 @@ using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.CreateDepartmentInfo;
 
-public class CreateDepartmentInfoCommandHandler : IRequestHandler<CreateDepartmentInfoCommand,long>
+public class CreateDepartmentInfoCommandHandler : IRequestHandler<CreateDepartmentInfoCommand, long>
 {
     private readonly IUnitofWork _unitofWork;
     public CreateDepartmentInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;

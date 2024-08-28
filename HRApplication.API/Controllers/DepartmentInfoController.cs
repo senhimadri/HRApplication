@@ -37,7 +37,7 @@ public class DepartmentInfoController : ControllerBase
 
     [HttpDelete]
     [Route("DeleteDepartment")]
-    public async Task<IActionResult> DeleteDepartment (long _primaryId)
+    public async Task<IActionResult> DeleteDepartment(long _primaryId)
     {
         var command = new DeleteDepartmentInfoCommand { PrimaryId = _primaryId };
         var response = await _mediator.Send(command);

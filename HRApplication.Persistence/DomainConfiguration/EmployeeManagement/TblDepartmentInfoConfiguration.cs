@@ -20,9 +20,9 @@ public class TblDepartmentInfoConfiguration : IEntityTypeConfiguration<TblDepart
         builder.HasData(
             new TblDepartmentInfo
             {
-                IntPrimaryId=1,
-                StrDepartmentName="Administration",
-                StrDepartmentCode="ADM001"
+                IntPrimaryId = 1,
+                StrDepartmentName = "Administration",
+                StrDepartmentCode = "ADM001"
             });
 
 

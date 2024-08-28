@@ -18,7 +18,7 @@ public class GetDepartmentInfoListRequestHandler : IRequestHandler<GetDepartment
     {
 
         var Filter = GetFilter(request);
-        var DepartmentList =await _unitofWork.DepartmentInfoRepository.GetMany(Filter);
+        var DepartmentList = await _unitofWork.DepartmentInfoRepository.GetMany(Filter);
 
         return DepartmentInfoMap.DepartmentInfoList(DepartmentList);
     }
@@ -28,7 +28,7 @@ public class GetDepartmentInfoListRequestHandler : IRequestHandler<GetDepartment
         var filter = PredicateBuilder.New<TblDepartmentInfo>(true);
 
         if (!string.IsNullOrEmpty(request.SearchText))
-            filter = filter.And(x => (x.StrDepartmentName != null && x.StrDepartmentName.Contains(request.SearchText)) 
+            filter = filter.And(x => (x.StrDepartmentName != null && x.StrDepartmentName.Contains(request.SearchText))
                             || (x.StrDepartmentCode != null && x.StrDepartmentCode.Contains(request.SearchText)));
 
         return filter;

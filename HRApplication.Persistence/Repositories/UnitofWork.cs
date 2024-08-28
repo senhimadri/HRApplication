@@ -11,7 +11,7 @@ public class UnitofWork : IUnitofWork
     private IDepartmentInfoRepository? _departmentInfoRepository;
     public UnitofWork(HRApplicationDBContext context) => _context = context;
 
-    public IEmployeeBasicInfoRepository EmployeeBasicInfoRepository => 
+    public IEmployeeBasicInfoRepository EmployeeBasicInfoRepository =>
                                     _employeeBasicInfoRepository ??= new EmployeeBasicInfoRepository(_context);
 
     public IDepartmentInfoRepository DepartmentInfoRepository =>

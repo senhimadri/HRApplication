@@ -3,18 +3,18 @@ using HRApplication.Application.Contracts.Parsistence;
 
 namespace HRApplication.Application.DataTransferObjects.EmployeeManagement.DepartmentInfo.Validator;
 
-public class IDepartmentValidator: AbstractValidator<IDepartmentDto>
+public class IDepartmentValidator : AbstractValidator<IDepartmentDto>
 {
 
     private readonly IUnitofWork _unitOfWork;
 
-	public IDepartmentValidator(IUnitofWork unitOfWork)
-	{
-		_unitOfWork = unitOfWork;
+    public IDepartmentValidator(IUnitofWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
 
-		RuleFor(x => x.DepartmentName)
-			.NotNull().NotEmpty().WithMessage("{PropertyName} shouldn't be empty")
-			.Length(0, 100).WithMessage("Department Name shouldn't be more than 100")
+        RuleFor(x => x.DepartmentName)
+            .NotNull().NotEmpty().WithMessage("{PropertyName} shouldn't be empty")
+            .Length(0, 100).WithMessage("Department Name shouldn't be more than 100")
             .MustAsync(async (deptName, token) =>
             {
                 var deptNameExist = await _unitOfWork

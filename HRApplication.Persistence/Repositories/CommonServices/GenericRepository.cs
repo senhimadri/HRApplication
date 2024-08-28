@@ -10,7 +10,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
     private readonly HRApplicationDBContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(HRApplicationDBContext context) => (_context, _dbSet)=(context, context.Set<T>());
+    public GenericRepository(HRApplicationDBContext context) => (_context, _dbSet) = (context, context.Set<T>());
 
     public async Task<T?> GetOne(long intPrimaryId)
     {

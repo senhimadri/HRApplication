@@ -33,7 +33,7 @@ public static class DepartmentInfoMap
 
     public static DepartmentInfoDto DepartmentInfo(TblDepartmentInfo data)
     {
-        return  new DepartmentInfoDto
+        return new DepartmentInfoDto
         {
             PrimaryId = data.IntPrimaryId,
             DepartmentName = data.StrDepartmentName,

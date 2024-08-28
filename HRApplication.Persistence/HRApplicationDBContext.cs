@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Persistence;
 
-public class HRApplicationDBContext: DbContext
+public class HRApplicationDBContext : DbContext
 {
     public HRApplicationDBContext(DbContextOptions<HRApplicationDBContext> options) : base(options)
     {
@@ -49,14 +49,14 @@ public class HRApplicationDBContext: DbContext
     {
         foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
         {
-            entity.Entity.IntAccountId=1;
+            entity.Entity.IntAccountId = 1;
             if (entity.State == EntityState.Added)
             {
                 entity.Entity.DteCtratedAt = DateTime.UtcNow;
                 entity.Entity.IntCreatedBy = 1;
                 entity.Entity.IsActive = true;
             }
-            else if(entity.State == EntityState.Modified)
+            else if (entity.State == EntityState.Modified)
             {
                 entity.Entity.DteUpdatedAt = DateTime.UtcNow;
                 entity.Entity.IntUpdatedBy = 1;

@@ -8,7 +8,7 @@ public class TblLeaveTypeInfo : BaseDomainEntity
     public string? StrLeaveTypeName { get; set; }
     public string? StrLeaveTypeCode { get; set; }
 
-    public ICollection<TblLeaveBalance>? TblLeaveBalance { get; set; } 
+    public ICollection<TblLeaveBalance>? TblLeaveBalance { get; set; }
     public ICollection<TblLeaveApplication>? TblLeaveApplication { get; set; }
 }
 

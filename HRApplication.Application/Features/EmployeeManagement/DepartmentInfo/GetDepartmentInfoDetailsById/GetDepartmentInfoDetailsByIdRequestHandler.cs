@@ -13,7 +13,7 @@ public class GetDepartmentInfoDetailsByIdRequestHandler : IRequestHandler<GetDep
     public async Task<DepartmentInfoDto> Handle(GetDepartmentInfoDetailsByIdRequest request, CancellationToken cancellationToken)
     {
 
-        var DepartmentDetails =await _unitofWork.DepartmentInfoRepository.GetOne(request.DepartmentId);
+        var DepartmentDetails = await _unitofWork.DepartmentInfoRepository.GetOne(request.DepartmentId);
 
         if (DepartmentDetails is null)
             throw new NullReferenceException();

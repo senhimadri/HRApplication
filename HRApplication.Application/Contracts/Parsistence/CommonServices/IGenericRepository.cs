@@ -4,9 +4,9 @@ namespace HRApplication.Application.Contracts.Parsistence.CommonServices;
 
 public interface IGenericRepository<T> where T : class
 {
-    Task<T?> GetOne (long intPrimaryId);
+    Task<T?> GetOne(long intPrimaryId);
     Task<List<T>> GetMany(Expression<Func<T, bool>> filter);
-    
+
     Task<T> InsertOne(T entity);
     Task<List<T>> InsertMany(List<T> entitys);
 
@@ -19,6 +19,6 @@ public interface IGenericRepository<T> where T : class
     Task InActiveOne(long IntPrimaryId);
     Task InActiveMany(Expression<Func<T, bool>> filter);
 
-    Task<bool> IsExist (Expression<Func<T, bool>> filter);
+    Task<bool> IsExist(Expression<Func<T, bool>> filter);
     Task<long> GetCount(Expression<Func<T, bool>> filter);
 }

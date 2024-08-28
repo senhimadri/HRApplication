@@ -6,14 +6,14 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Persistence.Repositories.EmployeeManagement;
 
-public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInfo> , IEmployeeBasicInfoRepository
+public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInfo>, IEmployeeBasicInfoRepository
 {
     private readonly HRApplicationDBContext _dbContext;
-	public EmployeeBasicInfoRepository(HRApplicationDBContext dbContext) : base(dbContext) => _dbContext = dbContext;
+    public EmployeeBasicInfoRepository(HRApplicationDBContext dbContext) : base(dbContext) => _dbContext = dbContext;
 
     public async Task<TblEmployeeBasicInfo?> GetEmployeeDetailsbyId(long EmployeeId)
     {
-        var employeeDetails = await GetEmployeeDetailsQuery(x=>x.IntPrimaryId==EmployeeId)
+        var employeeDetails = await GetEmployeeDetailsQuery(x => x.IntPrimaryId == EmployeeId)
                                         .FirstOrDefaultAsync();
         return employeeDetails;
     }

@@ -12,7 +12,7 @@ public class DeleteDepartmentInfoCommandHandler : IRequestHandler<DeleteDepartme
 
     public async Task<Unit> Handle(DeleteDepartmentInfoCommand request, CancellationToken cancellationToken)
     {
-        var DepartmentInfo =await _unitofWork.DepartmentInfoRepository.GetOne(request.PrimaryId);
+        var DepartmentInfo = await _unitofWork.DepartmentInfoRepository.GetOne(request.PrimaryId);
 
         if (DepartmentInfo is null)
             throw new NotFoundException(name: nameof(TblDepartmentInfo), key: request.PrimaryId);
