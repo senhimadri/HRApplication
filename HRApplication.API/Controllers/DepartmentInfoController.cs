@@ -1,6 +1,8 @@
 ﻿using HRApplication.Application.DataTransferObjects.EmployeeManagement.DepartmentInfo;
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.CreateDepartmentInfo;
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.DeleteDepartmentInfo;
+using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.GetDepartmentInfoDetailsById;
+using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.GetDepartmentInfoList;
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.UpdateDepartmentInfo;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
 using MediatR;
@@ -42,5 +44,23 @@ public class DepartmentInfoController : ControllerBase
         var command = new DeleteDepartmentInfoCommand { PrimaryId = _primaryId };
         var response = await _mediator.Send(command);
         return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("LandingDepartmentList")]
+    public async Task<IActionResult> LandingDepartmentList (string? _searchtext)
+    {
+        var request = new GetDepartmentInfoListRequest { SearchText = _searchtext };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
+
+    [HttpGet]
+    [Route("GetDepartmentDetailsById")]
+    public async Task<IActionResult> GetDepartmentDetailsById(long _departmentId)
+    {
+        var request = new GetDepartmentInfoDetailsByIdRequest { DepartmentId = _departmentId };
+        var response = await _mediator.Send(request);
+        return Ok(response); 
     }
 }
