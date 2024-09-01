@@ -30,7 +30,7 @@ public class HRApplicationDBContext : DbContext
                 .Property("IntPrimaryId")
                 .ValueGeneratedOnAdd();
 
-            // Apply global query filter for IsDeleted property
+
             if (entityType.ClrType.GetProperty("IsActive") != null)
             {
                 var parameter = Expression.Parameter(entityType.ClrType, "e");

@@ -16,7 +16,6 @@ public class GetDepartmentInfoListRequestHandler : IRequestHandler<GetDepartment
 
     public async Task<List<DepartmentInfoDto>> Handle(GetDepartmentInfoListRequest request, CancellationToken cancellationToken)
     {
-
         var Filter = GetFilter(request);
         var DepartmentList = await _unitofWork.DepartmentInfoRepository.GetMany(Filter);
 
@@ -30,7 +29,6 @@ public class GetDepartmentInfoListRequestHandler : IRequestHandler<GetDepartment
         if (!string.IsNullOrEmpty(request.SearchText))
             filter = filter.And(x => (x.StrDepartmentName != null && x.StrDepartmentName.Contains(request.SearchText))
                             || (x.StrDepartmentCode != null && x.StrDepartmentCode.Contains(request.SearchText)));
-
         return filter;
     }
 }

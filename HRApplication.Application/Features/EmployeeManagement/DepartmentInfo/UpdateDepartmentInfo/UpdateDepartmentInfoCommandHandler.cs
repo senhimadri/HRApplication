@@ -17,6 +17,12 @@ public class UpdateDepartmentInfoCommandHandler : IRequestHandler<UpdateDepartme
         if (request.DepartmentInfo is null)
             throw new ArgumentNullException("API Body is null");
 
+        var IsDepartmentExist = await _unitofWork.DepartmentInfoRepository
+                                    .IsExist(x => x.IntPrimaryId == request.DepartmentInfo.PrimaryId);
+
+        if (!IsDepartmentExist)
+            throw new Exception("Department is not available.");
+
         var Validator = new UpdateDepartmentValidator(_unitofWork);
         var ValidationResult = await Validator.ValidateAsync(request.DepartmentInfo);
 
