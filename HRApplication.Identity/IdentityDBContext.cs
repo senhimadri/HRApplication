@@ -1,4 +1,4 @@
-﻿using HRApplication.Identity.Domain.Authentication;
+﻿using HRApplication.Identity.Domain;
 using MongoDB.Driver;
 
 namespace HRApplication.Identity;
