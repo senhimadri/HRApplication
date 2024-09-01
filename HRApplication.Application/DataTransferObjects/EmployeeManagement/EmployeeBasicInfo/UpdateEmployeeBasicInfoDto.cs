@@ -3,7 +3,7 @@ using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeB
 
 namespace HRApplication.Application.DataTransferObjects.LeaveManagement;
 
-public class UpdateEmployeeBasicInfoDto :BaseDto,IEmployeeBasicInfoDto
+public class UpdateEmployeeBasicInfoDto : BaseDto, IEmployeeBasicInfoDto
 {
     public string? EmployeeName { get; set; }
     public string? EmployeeCode { get; set; }

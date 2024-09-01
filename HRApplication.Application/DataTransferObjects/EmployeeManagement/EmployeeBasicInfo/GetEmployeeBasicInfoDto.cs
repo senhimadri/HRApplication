@@ -2,7 +2,7 @@
 
 namespace HRApplication.Application.DataTransferObjects.LeaveManagement;
 
-public class GetEmployeeBasicInfoDto : BaseDto 
+public class GetEmployeeBasicInfoDto : BaseDto
 {
     public string? EmployeeName { get; set; }
     public string? EmployeeCode { get; set; }

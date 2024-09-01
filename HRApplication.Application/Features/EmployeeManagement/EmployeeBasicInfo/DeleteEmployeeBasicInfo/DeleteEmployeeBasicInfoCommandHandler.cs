@@ -13,7 +13,7 @@ public class DeleteEmployeeBasicInfoCommandHandler : IRequestHandler<DeleteEmplo
 
     public async Task<Unit> Handle(DeleteEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {
-        var EmployeeDetails =await  _unitofWork.EmployeeBasicInfoRepository.GetOne(request.EmployeeId);
+        var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository.GetOne(request.EmployeeId);
 
         if (EmployeeDetails is null)
             throw new NotFoundException(name: nameof(TblEmployeeBasicInfo), key: request.EmployeeId);

@@ -10,13 +10,13 @@ public static class EmployeeBasicInfoMap
         return new TblEmployeeBasicInfo()
         {
 
-            StrEmployeeName =data.EmployeeName,
-            StrEmployeeCode =data.EmployeeCode,
-            DteDateOfBirth =data.DateOfBirth,
-            IntDepartmentId =data.DepartmentId,
-            IntDesignationId =data.DesignationId,
-            IntGenderId =data.GenderId,
-            IntReligionId =data.ReligionId
+            StrEmployeeName = data.EmployeeName,
+            StrEmployeeCode = data.EmployeeCode,
+            DteDateOfBirth = data.DateOfBirth,
+            IntDepartmentId = data.DepartmentId,
+            IntDesignationId = data.DesignationId,
+            IntGenderId = data.GenderId,
+            IntReligionId = data.ReligionId
         };
     }
 
@@ -25,13 +25,13 @@ public static class EmployeeBasicInfoMap
         return new TblEmployeeBasicInfo()
         {
             IntPrimaryId = data.PrimaryId,
-            StrEmployeeName =data.EmployeeName,
-            StrEmployeeCode =data.EmployeeCode,
-            DteDateOfBirth =data.DateOfBirth,
-            IntDepartmentId =data.DepartmentId,
-            IntDesignationId =data.DesignationId,
-            IntGenderId =data.GenderId,
-            IntReligionId =data.ReligionId
+            StrEmployeeName = data.EmployeeName,
+            StrEmployeeCode = data.EmployeeCode,
+            DteDateOfBirth = data.DateOfBirth,
+            IntDepartmentId = data.DepartmentId,
+            IntDesignationId = data.DesignationId,
+            IntGenderId = data.GenderId,
+            IntReligionId = data.ReligionId
         };
     }
 
@@ -41,7 +41,7 @@ public static class EmployeeBasicInfoMap
         {
             PrimaryId = data.IntPrimaryId,
             EmployeeName = data.StrEmployeeName,
-            EmployeeCode =data.StrEmployeeCode,
+            EmployeeCode = data.StrEmployeeCode,
             DateOfBirth = data.DteDateOfBirth,
 
             DepartmentId = data.IntDepartmentId,
@@ -60,11 +60,11 @@ public static class EmployeeBasicInfoMap
 
     public static List<GetEmployeeBasicInfoLandingDto> GetEmployeeList(IList<TblEmployeeBasicInfo> data)
     {
-        var map =  data.Select(x=> new GetEmployeeBasicInfoLandingDto
+        var map = data.Select(x => new GetEmployeeBasicInfoLandingDto
         {
             PrimaryId = x.IntPrimaryId,
             EmployeeName = x.StrEmployeeName,
-            EmployeeCode =x.StrEmployeeCode,
+            EmployeeCode = x.StrEmployeeCode,
             DateOfBirth = x.DteDateOfBirth,
             Department = (x.TblDepartmentInfo?.StrDepartmentName),
             Designation = x.TblDesignationInfo?.StrDesignationName,

@@ -10,7 +10,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
     private readonly HRApplicationDBContext _context;
     private readonly DbSet<T> _dbSet;
 
-    public GenericRepository(HRApplicationDBContext context) => (_context, _dbSet)=(context, context.Set<T>());
+    public GenericRepository(HRApplicationDBContext context) => (_context, _dbSet) = (context, context.Set<T>());
 
     public async Task<T?> GetOne(long intPrimaryId)
     {
@@ -83,9 +83,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseDomainEn
         }
     }
 
-    public async Task<bool> IsExist(long PrimaryId)
+    public async Task<bool> IsExist(Expression<Func<T, bool>> filter)
     {
-        return await _dbSet.AnyAsync(e => e.IntPrimaryId == PrimaryId);
+        return await _dbSet.AnyAsync(filter);
     }
 
     public async Task<long> GetCount(Expression<Func<T, bool>> filter)
