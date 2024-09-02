@@ -14,7 +14,7 @@ public class CreateDepartmentInfoCommandHandler : IRequestHandler<CreateDepartme
     public async Task<long> Handle(CreateDepartmentInfoCommand request, CancellationToken cancellationToken)
     {
         if (request.Department is null)
-            throw new ArgumentNullException("API Body is null");
+            throw new BadRequestException("API Body is null");
 
 
         var validator = new CreateDepartmentValidator(_unitofWork);

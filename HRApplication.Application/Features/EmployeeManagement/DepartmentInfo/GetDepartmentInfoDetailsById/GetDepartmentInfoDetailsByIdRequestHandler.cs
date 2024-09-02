@@ -1,6 +1,8 @@
 ﻿using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.DataTransferObjects.EmployeeManagement.DepartmentInfo;
+using HRApplication.Application.Exceptions;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
+using HRApplication.Domain.EmployeeManagement;
 using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.GetDepartmentInfoDetailsById;
@@ -12,11 +14,10 @@ public class GetDepartmentInfoDetailsByIdRequestHandler : IRequestHandler<GetDep
 
     public async Task<DepartmentInfoDto> Handle(GetDepartmentInfoDetailsByIdRequest request, CancellationToken cancellationToken)
     {
-
         var DepartmentDetails = await _unitofWork.DepartmentInfoRepository.GetOne(request.DepartmentId);
 
         if (DepartmentDetails is null)
-            throw new NullReferenceException();
+            throw new NotFoundException(name: nameof(TblDepartmentInfo), key: request.DepartmentId);
 
         var result = DepartmentInfoMap.DepartmentInfo(DepartmentDetails);
 

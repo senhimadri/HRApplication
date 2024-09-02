@@ -2,6 +2,7 @@
 using HRApplication.Application.DataTransferObjects.EmployeeManagement.DepartmentInfo.Validator;
 using HRApplication.Application.Exceptions;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
+using HRApplication.Domain.EmployeeManagement;
 using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.UpdateDepartmentInfo;
@@ -15,13 +16,13 @@ public class UpdateDepartmentInfoCommandHandler : IRequestHandler<UpdateDepartme
     public async Task<Unit> Handle(UpdateDepartmentInfoCommand request, CancellationToken cancellationToken)
     {
         if (request.DepartmentInfo is null)
-            throw new ArgumentNullException("API Body is null");
+            throw new BadRequestException("API Body is null");
 
         var IsDepartmentExist = await _unitofWork.DepartmentInfoRepository
                                     .IsExist(x => x.IntPrimaryId == request.DepartmentInfo.PrimaryId);
 
         if (!IsDepartmentExist)
-            throw new Exception("Department is not available.");
+            throw new NotFoundException(name: nameof(TblDepartmentInfo), key: request.DepartmentInfo.PrimaryId);
 
         var Validator = new UpdateDepartmentValidator(_unitofWork);
         var ValidationResult = await Validator.ValidateAsync(request.DepartmentInfo);
