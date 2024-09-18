@@ -20,19 +20,17 @@ public static class EmployeeBasicInfoMap
         };
     }
 
-    public static TblEmployeeBasicInfo UpdateEmployee(UpdateEmployeeBasicInfoDto data)
+    public static TblEmployeeBasicInfo UpdateEmployee(UpdateEmployeeBasicInfoDto input, TblEmployeeBasicInfo existing)
     {
-        return new TblEmployeeBasicInfo()
-        {
-            IntPrimaryId = data.PrimaryId,
-            StrEmployeeName = data.EmployeeName,
-            StrEmployeeCode = data.EmployeeCode,
-            DteDateOfBirth = data.DateOfBirth,
-            IntDepartmentId = data.DepartmentId,
-            IntDesignationId = data.DesignationId,
-            IntGenderId = data.GenderId,
-            IntReligionId = data.ReligionId
-        };
+        existing.StrEmployeeName = input.EmployeeName;
+        existing.StrEmployeeCode = input.EmployeeCode;
+        existing.DteDateOfBirth = input.DateOfBirth;
+        existing.IntDepartmentId = input.DepartmentId;
+        existing.IntDesignationId = input.DesignationId;
+        existing.IntGenderId = input.GenderId;
+        existing.IntReligionId = input.ReligionId;
+
+        return existing;
     }
 
     public static GetEmployeeBasicInfoDto GetEmployee(TblEmployeeBasicInfo data)
