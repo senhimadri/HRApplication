@@ -4,7 +4,6 @@ using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.Delet
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.GetDepartmentInfoDetailsById;
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.GetDepartmentInfoList;
 using HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.UpdateDepartmentInfo;
-using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

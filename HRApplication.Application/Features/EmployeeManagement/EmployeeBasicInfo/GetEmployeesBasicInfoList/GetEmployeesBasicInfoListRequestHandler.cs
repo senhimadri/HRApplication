@@ -1,9 +1,12 @@
 using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
+using HRApplication.Application.Helper;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
 using HRApplication.Domain.EmployeeManagement;
 using LinqKit;
 using MediatR;
+using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
@@ -17,11 +20,17 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
 
     public async Task<List<GetEmployeeBasicInfoLandingDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
+        if (request.LandingParameeter is null)
+            throw new Exception();
 
         var Filter = GetFilter(request);
 
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
-                                    .GetEmployeeDetailsList(Filter);
+                                    .GetEmployeeDetailsQuery(Filter)
+                                    .Pagination(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize)
+                                    .ToListAsync();
+        if (EmployeeDetails is null)
+            throw new Exception();
 
         return EmployeeBasicInfoMap.GetEmployeeList(EmployeeDetails);
     }

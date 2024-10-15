@@ -2,7 +2,10 @@ using HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
 using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Persistence.Repositories.CommonServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace HRApplication.Persistence.Repositories.EmployeeManagement;
 
@@ -38,3 +41,4 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
 
 
 }
+

@@ -33,8 +33,11 @@ public static class EmployeeBasicInfoMap
         return existing;
     }
 
-    public static GetEmployeeBasicInfoDto GetEmployee(TblEmployeeBasicInfo data)
+    public static GetEmployeeBasicInfoDto? GetEmployee(TblEmployeeBasicInfo? data)
     {
+        if (data is null)
+            return null;
+
         return new GetEmployeeBasicInfoDto()
         {
             PrimaryId = data.IntPrimaryId,
