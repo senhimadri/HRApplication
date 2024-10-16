@@ -28,9 +28,10 @@ public class Result<T> : MasterResult
 
     public T? Data { get;}
 
-    public static Result<T> Success(T data) => new(data, true, Error.None);
-    public static  Result<T> Failure(Error error) => new(default, false, error);
+    public static Result<T> Success(T data) => new Result<T>(data, true, Error.None);
+    public static  Result<T> Failure(Error error) => new Result<T>(default, false, error);
 
     public static implicit operator Result<T>(Error error) => Failure(error);
+    public static implicit operator Result<T>(T data) => Success(data);
 }
 

@@ -5,5 +5,10 @@ public sealed record Error(int Code, string? Description = null)
     public static readonly Error None = new(200, string.Empty);
 }
 
-public sealed record ValidationError(string? PropertyName, string? Message, string? ErrorCode);
+public  class ValidationError
+{
+    public string? PropertyName { get; set; }
+    public string? Message { get; set; }
+    public string? ErrorCode { get; set; }
+};
 
