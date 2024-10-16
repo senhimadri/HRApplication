@@ -7,15 +7,12 @@ public class Result : MasterResult
         ValidationErrors = ValidationErrors;
     }
 
-  
-
     List<ValidationError>? ValidationErrors { get; }
     bool IsValidationFailure => ValidationErrors is not null;
 
     public static Result Success() => new(true, Error.None);
     public static Result Failure(Error error) => new(false, error);
-
-    public static Result ValidationFailure(List<ValidationError> error) => new(false, Errors.ValidationFailed , error);
+    public static Result ValidationFailure(List<ValidationError> errors) => new(false, Errors.ValidationFailed , errors);
 
     public static implicit operator Result(Error error) => Failure(error);
 
