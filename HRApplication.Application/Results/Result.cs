@@ -8,14 +8,13 @@ public class Result : MasterResult
     }
 
     List<ValidationError>? ValidationErrors { get; }
-    bool IsValidationFailure => ValidationErrors is not null;
+    bool IsValidationFailure => ValidationErrors is not null && ValidationErrors.Any();
 
     public static Result Success() => new(true, Error.None);
     public static Result Failure(Error error) => new(false, error);
     public static Result ValidationFailure(List<ValidationError> errors) => new(false, Errors.ValidationFailed , errors);
 
     public static implicit operator Result(Error error) => Failure(error);
-
 }
 
 
