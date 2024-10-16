@@ -8,5 +8,6 @@ public static class Errors
     public static readonly Error UnauthorizedAccess = new Error(401, "Unauthorized access.");
     public static readonly Error Forbidden = new Error(403, "Forbidden access.");
     public static readonly Error ValidationFailed = new Error(422, "Validation failed.");
+    public static Error NewError(int Code, string message) => new Error(Code, message);
 }
 
