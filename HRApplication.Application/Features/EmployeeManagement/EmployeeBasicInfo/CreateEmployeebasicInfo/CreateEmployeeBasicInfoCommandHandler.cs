@@ -19,7 +19,17 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
         var validationResult = await validator.ValidateAsync(request.employeeBasicInfo);
 
         if (!validationResult.IsValid)
-            return default;
+        {
+            List<ValidationError> aa = validationResult.Errors.Select(x => new ValidationError
+            {
+                PropertyName = x.PropertyName,
+                Message = x.ErrorMessage,
+                ErrorCode = x.ErrorCode
+            });
+
+            return Result.ValidationFailure(aa);
+        }
+            
            
 
         var employeeBasicInfo = EmployeeBasicInfoMap.CreateEmployee(request.employeeBasicInfo);

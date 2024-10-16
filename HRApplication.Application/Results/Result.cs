@@ -1,28 +1,16 @@
 ﻿namespace HRApplication.Application.Results;
 
-public class MasterResult
-{
-    protected MasterResult(bool isSuccess, Error error)
-    {
-        if (isSuccess && error != Error.None || !isSuccess && error == Error.None)
-            throw new ArgumentException("Invalid error.");
-
-        IsSuccess = isSuccess;
-        Error = error;
-    } 
-    public bool IsSuccess { get; }
-    public bool IsFailure => !IsSuccess;
-    public Error Error { get; }
-}
-
 public class Result : MasterResult
 {
-    public Result(bool isSuccess, Error error, List<ValidationError>? vaidationError = null) : base(isSuccess, error)
+    public Result(bool isSuccess, Error error, List<ValidationError>? vaidationErrors = null) : base(isSuccess, error)
     {
-        ValidationError = ValidationError;
+        ValidationErrors = ValidationErrors;
     }
 
-    List<ValidationError>? ValidationError { get; }
+  
+
+    List<ValidationError>? ValidationErrors { get; }
+    bool IsValidationFailure => ValidationErrors is not null;
 
     public static Result Success() => new(true, Error.None);
     public static Result Failure(Error error) => new(false, error);
@@ -33,7 +21,7 @@ public class Result : MasterResult
 
 }
 
-public sealed record ValidationError(string? PropertyName, string? Message);
+
 
 public class Result<T> : MasterResult
 {
