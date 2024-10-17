@@ -22,14 +22,11 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
 
         if (!validationResult.IsValid)
             return Result.ValidationFailure(validationResult.ConvertValidationResult());
-            
-           
+             
         var employeeBasicInfo = EmployeeBasicInfoMap.CreateEmployee(request.employeeBasicInfo);
-
         employeeBasicInfo = await _unitofWork.EmployeeBasicInfoRepository.InsertOne(employeeBasicInfo);
 
         await _unitofWork.SaveAsync();
-
         return Result.Success();
     }
 }
