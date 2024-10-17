@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<List<GetEmployeeBasicInfoLandingDto>>
+public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<List<GetEmployeeBasicInfoLandingDto>>>
 {
     private readonly IUnitofWork _unitofWork;
 
