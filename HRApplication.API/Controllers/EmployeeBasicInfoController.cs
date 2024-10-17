@@ -20,7 +20,7 @@ public class EmployeeBasicInfoController : ControllerBase
 
     [HttpPost]
     [Route("CreateNewEmployee")]
-    public async Task<ActionResult> CreateNewEmployee ([FromBody] CreateEmployeeBasicInfoDto _employeeBasicInfo)
+    public async Task<ActionResult> CreateNewEmployee([FromBody] CreateEmployeeBasicInfoDto _employeeBasicInfo)
     {
         var command = new CreateEmployeeBasicInfoCommand { employeeBasicInfo = _employeeBasicInfo };
         var response = await _mediator.Send(command);
@@ -47,15 +47,15 @@ public class EmployeeBasicInfoController : ControllerBase
 
     [HttpPost]
     [Route("LandingEmployeesList")]
-    public async Task<ActionResult> LandingEmployeesList (ParamsEmployeeBasicInfoLandingDto _landingParameeter)
+    public async Task<ActionResult> LandingEmployeesList(ParamsEmployeeBasicInfoLandingDto _landingParameeter)
     {
-        var request = new GetEmployeesBasicInfoListRequest { LandingParameeter= _landingParameeter };
+        var request = new GetEmployeesBasicInfoListRequest { LandingParameeter = _landingParameeter };
         var response = await _mediator.Send(request);
         return Ok(response);
     }
 
     [HttpGet]
-    [Route("GetEmployeeDetails")]
+    [Route("GetEmployeeDetailsById")]
     public async Task<ActionResult> GetEmployeeDetailsById(long _employeeId)
     {
         var request = new GetEmployeeBasicInfoDetailsByIdRequest { EmployeeId = _employeeId };

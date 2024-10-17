@@ -1,27 +1,37 @@
 using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
+using HRApplication.Application.Helper;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
+using HRApplication.Application.Results;
 using HRApplication.Domain.EmployeeManagement;
 using LinqKit;
 using MediatR;
+using System.Data.Entity;
+using System.Drawing.Printing;
 using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, List<GetEmployeeBasicInfoLandingDto>>
+public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<List<GetEmployeeBasicInfoLandingDto>>
 {
     private readonly IUnitofWork _unitofWork;
 
     public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
 
-    public async Task<List<GetEmployeeBasicInfoLandingDto>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
+    public async Task<Result<List<GetEmployeeBasicInfoLandingDto>>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
+        if (request.LandingParameeter is null)
+            return Errors.ContentNotFound;
 
         var Filter = GetFilter(request);
 
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
-                                    .GetEmployeeDetailsList(Filter);
+                                    .GetEmployeeDetailsQuery(Filter)
+                                    .Pagination(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize)
+                                    .ToListAsync();
+        if (EmployeeDetails is null)
+            return Errors.ContentNotFound;
 
         return EmployeeBasicInfoMap.GetEmployeeList(EmployeeDetails);
     }

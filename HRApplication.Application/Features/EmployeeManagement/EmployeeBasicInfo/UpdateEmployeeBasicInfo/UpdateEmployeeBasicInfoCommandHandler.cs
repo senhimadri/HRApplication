@@ -21,8 +21,16 @@ public class UpdateEmployeeBasicInfoCommandHandler : IRequestHandler<UpdateEmplo
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult);
 
-        var employeeBasicInfo = EmployeeBasicInfoMap.UpdateEmployee(request.employeeBasicInfo);
-        await _unitofWork.EmployeeBasicInfoRepository.ModifyOne(employeeBasicInfo);
+        var _existingEmployee = await _unitofWork.EmployeeBasicInfoRepository
+                                    .GetOne(request.employeeBasicInfo.PrimaryId);
+
+        if (_existingEmployee is null)
+            throw new NotFoundException("Employee", request.employeeBasicInfo.PrimaryId);
+
+        _existingEmployee = EmployeeBasicInfoMap.UpdateEmployee(request.employeeBasicInfo, _existingEmployee);
+
+
+        await _unitofWork.EmployeeBasicInfoRepository.ModifyOne(_existingEmployee);
         await _unitofWork.SaveAsync();
 
         return Unit.Value;

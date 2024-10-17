@@ -3,10 +3,11 @@ using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveManagement;
 using HRApplication.Domain.MasterConfiguratio;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace HRApplication.Persistence;
 
-public class HRApplicationDBContext: DbContext
+public class HRApplicationDBContext : DbContext
 {
     public HRApplicationDBContext(DbContextOptions<HRApplicationDBContext> options) : base(options)
     {
@@ -28,6 +29,19 @@ public class HRApplicationDBContext: DbContext
             modelBuilder.Entity(entityType.ClrType)
                 .Property("IntPrimaryId")
                 .ValueGeneratedOnAdd();
+
+            // Apply global query filter for IsDeleted property
+            if (entityType.ClrType.GetProperty("IsActive") != null)
+            {
+                var parameter = Expression.Parameter(entityType.ClrType, "e");
+                var property = Expression.Property(parameter, "IsActive");
+                var constant = Expression.Constant(true);
+                var body = Expression.Equal(property, constant);
+                var lambda = Expression.Lambda(body, parameter);
+
+                modelBuilder.Entity(entityType.ClrType)
+                    .HasQueryFilter(lambda);
+            }
         }
     }
 
@@ -35,14 +49,14 @@ public class HRApplicationDBContext: DbContext
     {
         foreach (var entity in ChangeTracker.Entries<BaseDomainEntity>())
         {
-            entity.Entity.IntAccountId=1;
+            entity.Entity.IntAccountId = 1;
             if (entity.State == EntityState.Added)
             {
                 entity.Entity.DteCtratedAt = DateTime.UtcNow;
                 entity.Entity.IntCreatedBy = 1;
                 entity.Entity.IsActive = true;
             }
-            else if(entity.State == EntityState.Modified)
+            else if (entity.State == EntityState.Modified)
             {
                 entity.Entity.DteUpdatedAt = DateTime.UtcNow;
                 entity.Entity.IntUpdatedBy = 1;

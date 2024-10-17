@@ -13,17 +13,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{DA7D6420-0F4E-4F39-8FED-C8F0FAF6EA14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.API", "HRApplication.API\HRApplication.API.csproj", "{64656816-553E-4668-B058-4029E5CEE90E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.API", "HRApplication.API\HRApplication.API.csproj", "{64656816-553E-4668-B058-4029E5CEE90E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.Application", "HRApplication.Application\HRApplication.Application.csproj", "{5EB9A7F3-3208-46E4-B828-0EB43C47D565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Application", "HRApplication.Application\HRApplication.Application.csproj", "{5EB9A7F3-3208-46E4-B828-0EB43C47D565}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.Domain", "HRApplication.Domain\HRApplication.Domain.csproj", "{1516518F-8F3B-4F88-A17D-A5BA5D06A446}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Domain", "HRApplication.Domain\HRApplication.Domain.csproj", "{1516518F-8F3B-4F88-A17D-A5BA5D06A446}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.Identity", "HRApplication.Identity\HRApplication.Identity.csproj", "{526D925F-4AB8-416C-A0D7-F2B11C866C83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Identity", "HRApplication.Identity\HRApplication.Identity.csproj", "{526D925F-4AB8-416C-A0D7-F2B11C866C83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.Infrastructure", "HRApplication.Infrastructure\HRApplication.Infrastructure.csproj", "{834B49FB-1DA6-4B5E-B4DB-02A18F0824CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Infrastructure", "HRApplication.Infrastructure\HRApplication.Infrastructure.csproj", "{834B49FB-1DA6-4B5E-B4DB-02A18F0824CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRApplication.Persistence", "HRApplication.Persistence\HRApplication.Persistence.csproj", "{9F515C05-3037-47F2-879F-AC0943F5479D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Persistence", "HRApplication.Persistence\HRApplication.Persistence.csproj", "{9F515C05-3037-47F2-879F-AC0943F5479D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

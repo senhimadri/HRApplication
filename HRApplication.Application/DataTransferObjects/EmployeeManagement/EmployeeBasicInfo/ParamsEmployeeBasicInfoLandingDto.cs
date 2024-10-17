@@ -8,5 +8,4 @@ public class ParamsEmployeeBasicInfoLandingDto : CommonPaginationDto
     public List<long>? DesignationIdList { get; set; }
     public List<long>? GenderIdList { get; set; }
     public List<long>? ReligionIdList { get; set; }
-
 }
