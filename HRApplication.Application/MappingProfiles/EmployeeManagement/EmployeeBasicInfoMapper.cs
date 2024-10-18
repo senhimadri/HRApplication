@@ -4,13 +4,12 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HRApplication.Application.MappingProfiles.EmployeeManagement;
 
-public static class EmployeeBasicInfoMap
+public static class EmployeeBasicInfoMapper
 {
     public static TblEmployeeBasicInfo MapToEmployeeEntity(this CreateEmployeeBasicInfoDto data)
     {
         return new TblEmployeeBasicInfo()
         {
-
             StrEmployeeName = data.EmployeeName,
             StrEmployeeCode = data.EmployeeCode,
             DteDateOfBirth = data.DateOfBirth,

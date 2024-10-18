@@ -21,10 +21,10 @@ public class UpdateEmployeeBasicInfoCommandHandler : IRequestHandler<UpdateEmplo
             return Errors.ContentNotFound;
 
         var validationResult = await new UpdateEmployeeBasicInfoDtoValidator(_unitofWork)
-                       .ValidateAsync(request.employeeBasicInfo);
+                       .ValidateAndReturnResultAsync(request.employeeBasicInfo);
 
         if (!validationResult.IsValid)
-            return Result.ValidationFailure(validationResult.MapToValidationErrorFormat());
+            return Result.ValidationFailure(validationResult.ToValidationErrorList());
 
         var _existingEmployee = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetOne(request.employeeBasicInfo.PrimaryId);

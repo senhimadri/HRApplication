@@ -30,7 +30,8 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetEmployeeDetailsQuery(Filter)
                                     .MapToEmployeeLandingDto()
-                                    .ToPagination(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
+                                    .ToPaginatedResultAsync(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
+
         if (EmployeeDetails.Data is null || !EmployeeDetails.Data.Any())
             return Errors.ContentNotFound;
 
@@ -42,27 +43,28 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
     {
         var filter = PredicateBuilder.New<TblEmployeeBasicInfo>(true);
 
-        if (!string.IsNullOrEmpty(request.LandingParameeter?.SearchText))
+        string? searchText = request.LandingParameeter?.SearchText;
+
+        if (!string.IsNullOrEmpty(searchText))
             filter = filter.And(x =>
-              (x.StrEmployeeName != null && x.StrEmployeeName.Contains(request.LandingParameeter.SearchText)) ||
-              (x.StrEmployeeCode != null && x.StrEmployeeCode.Contains(request.LandingParameeter.SearchText)) ||
-              (x.TblDepartmentInfo != null && x.TblDepartmentInfo.StrDepartmentName != null && x.TblDepartmentInfo.StrDepartmentName.Contains(request.LandingParameeter.SearchText)) ||
-              (x.TblDesignationInfo != null && x.TblDesignationInfo.StrDesignationName != null && x.TblDesignationInfo.StrDesignationName.Contains(request.LandingParameeter.SearchText)) ||
-              (x.TblReligionInfo != null && x.TblReligionInfo.StrReligionName != null && x.TblReligionInfo.StrReligionName.Contains(request.LandingParameeter.SearchText)) ||
-              (x.TblGenderInfo != null && x.TblGenderInfo.StrGenderName != null && x.TblGenderInfo.StrGenderName.Contains(request.LandingParameeter.SearchText)));
+              (x.StrEmployeeName != null && x.StrEmployeeName.Contains(searchText)) ||
+              (x.StrEmployeeCode != null && x.StrEmployeeCode.Contains(searchText)) ||
+              (x.TblDepartmentInfo != null && x.TblDepartmentInfo.StrDepartmentName != null && x.TblDepartmentInfo.StrDepartmentName.Contains(searchText)) ||
+              (x.TblDesignationInfo != null && x.TblDesignationInfo.StrDesignationName != null && x.TblDesignationInfo.StrDesignationName.Contains(searchText)) ||
+              (x.TblReligionInfo != null && x.TblReligionInfo.StrReligionName != null && x.TblReligionInfo.StrReligionName.Contains(searchText)) ||
+              (x.TblGenderInfo != null && x.TblGenderInfo.StrGenderName != null && x.TblGenderInfo.StrGenderName.Contains(searchText)));
 
-
-        if (request.LandingParameeter?.DepartmentIdList is not null && request.LandingParameeter.DepartmentIdList.Any())
+        if (request.LandingParameeter?.DepartmentIdList?.Any() == true)
             filter = filter.And(x => request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId));
 
 
-        if (request.LandingParameeter?.DesignationIdList is not null && request.LandingParameeter.DesignationIdList.Any())
+        if (request.LandingParameeter?.DesignationIdList?.Any() == true)
             filter = filter.And(x => request.LandingParameeter.DesignationIdList.Contains(x.IntDesignationId));
 
-        if (request.LandingParameeter?.GenderIdList is not null && request.LandingParameeter.GenderIdList.Any())
+        if (request.LandingParameeter?.GenderIdList?.Any() == true)
             filter = filter.And(x => request.LandingParameeter.GenderIdList.Contains(x.IntGenderId));
 
-        if (request.LandingParameeter?.ReligionIdList is not null && request.LandingParameeter.ReligionIdList.Any())
+        if (request.LandingParameeter?.ReligionIdList?.Any() == true )
             filter = filter.And(x => request.LandingParameeter.ReligionIdList.Contains(x.IntReligionId));
 
         return filter;

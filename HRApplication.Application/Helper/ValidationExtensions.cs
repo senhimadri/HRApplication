@@ -4,9 +4,9 @@ using HRApplication.Application.Results;
 
 namespace HRApplication.Application.Helper;
 
-public static class ValidationResultConverter
+public static class ValidationExtensions
 {
-    public static List<ValidationError> MapToValidationErrorFormat(this FluentValidation.Results.ValidationResult validationResult)
+    public static List<ValidationError> ToValidationErrorList(this FluentValidation.Results.ValidationResult validationResult)
     {
         var result = validationResult.Errors.Select(x => new ValidationError
         {
@@ -17,7 +17,7 @@ public static class ValidationResultConverter
         return result;
     }
 
-    public static async Task<ValidationResult> ValidateAsync<T>(this IValidator<T> validator, T instance)
+    public static async Task<ValidationResult> ValidateAndReturnResultAsync<T>(this IValidator<T> validator, T instance)
     {
         return await validator.ValidateAsync(instance);
     }

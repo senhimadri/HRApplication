@@ -1,4 +1,5 @@
-﻿using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
+﻿using HRApplication.API.Helper;
+using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
@@ -20,46 +21,69 @@ public class EmployeeBasicInfoController : ControllerBase
 
     [HttpPost]
     [Route("CreateNewEmployee")]
-    public async Task<ActionResult> CreateNewEmployee([FromBody] CreateEmployeeBasicInfoDto _employeeBasicInfo)
+    public async Task<IActionResult> CreateNewEmployee([FromBody] CreateEmployeeBasicInfoDto _employeeBasicInfo)
     {
         var command = new CreateEmployeeBasicInfoCommand { employeeBasicInfo = _employeeBasicInfo };
         var response = await _mediator.Send(command);
-        return Ok(response);
+
+        return response.Match(
+            onSuccess: () => Ok(),
+            onValidationFailure: validationErrors => BadRequest(validationErrors),
+            onFailure: error => BadRequest(error.Description)
+        );
     }
 
     [HttpPut]
     [Route("UpdateEmployeeBasicInfo")]
-    public async Task<ActionResult> UpdateEmployeeBasicInfo([FromBody] UpdateEmployeeBasicInfoDto _employeeBasicInfo)
+    public async Task<IActionResult> UpdateEmployeeBasicInfo([FromBody] UpdateEmployeeBasicInfoDto _employeeBasicInfo)
     {
         var command = new UpdateEmployeeBasicInfoCommand { employeeBasicInfo = _employeeBasicInfo };
         var response = await _mediator.Send(command);
-        return Ok(response);
+
+        return response.Match(
+             onSuccess: () => Ok(),
+             onValidationFailure: validationErrors => BadRequest(validationErrors),
+             onFailure: error => BadRequest(error.Description)
+         );
     }
 
     [HttpDelete]
     [Route("DeleteEmployeeBasicInfo")]
-    public async Task<ActionResult> DeleteEmployeeBasicInfo(long _employeeId)
+    public async Task<IActionResult> DeleteEmployeeBasicInfo(long _employeeId)
     {
         var command = new DeleteEmployeeBasicInfoCommand { EmployeeId = _employeeId };
         var response = await _mediator.Send(command);
-        return Ok(response);
+
+        return response.Match(
+             onSuccess: () => Ok(),
+             onValidationFailure: validationErrors => BadRequest(validationErrors),
+             onFailure: error => BadRequest(error.Description)
+         );
     }
 
     [HttpPost]
     [Route("LandingEmployeesList")]
-    public async Task<ActionResult> LandingEmployeesList(ParamsEmployeeBasicInfoLandingDto _landingParameeter)
+    public async Task<IActionResult> LandingEmployeesList(ParamsEmployeeBasicInfoLandingDto _landingParameeter)
     {
         var request = new GetEmployeesBasicInfoListRequest { LandingParameeter = _landingParameeter };
         var response = await _mediator.Send(request);
-        return Ok(response);
+
+        return response.Match(
+                     onSuccess: data => Ok(data),
+                     onFailure: error => BadRequest(error)
+                 );
     }
 
     [HttpGet]
     [Route("GetEmployeeDetailsById")]
-    public async Task<ActionResult> GetEmployeeDetailsById(long _employeeId)
+    public async Task<IActionResult> GetEmployeeDetailsById(long _employeeId)
     {
         var request = new GetEmployeeBasicInfoDetailsByIdRequest { EmployeeId = _employeeId };
         var response = await _mediator.Send(request);
-        return Ok(response);
+
+        return response.Match(
+                     onSuccess: data => Ok(data),
+                     onFailure: error => BadRequest(error)
+                 );
     }
 }

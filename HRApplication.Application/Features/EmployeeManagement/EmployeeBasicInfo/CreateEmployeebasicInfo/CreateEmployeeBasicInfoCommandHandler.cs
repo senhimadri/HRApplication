@@ -17,10 +17,10 @@ public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmplo
             return Errors.ContentNotFound;
 
         var validationResult = await new CreateEmployeeBasicInfoDtoValidator(_unitofWork)
-                               .ValidateAsync(request.employeeBasicInfo);
+                               .ValidateAndReturnResultAsync(request.employeeBasicInfo);
 
         if (!validationResult.IsValid)
-            return Result.ValidationFailure(validationResult.MapToValidationErrorFormat());
+            return Result.ValidationFailure(validationResult.ToValidationErrorList());
 
         var employeeBasicInfo = request.employeeBasicInfo.MapToEmployeeEntity();
 

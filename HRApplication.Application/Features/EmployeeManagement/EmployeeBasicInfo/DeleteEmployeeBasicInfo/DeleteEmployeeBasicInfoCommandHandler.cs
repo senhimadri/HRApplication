@@ -13,14 +13,14 @@ public class DeleteEmployeeBasicInfoCommandHandler : IRequestHandler<DeleteEmplo
 
     public async Task<Result> Handle(DeleteEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {
-        var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository.GetOne(request.EmployeeId);
+        var employeeDetails = await _unitofWork.EmployeeBasicInfoRepository.GetOne(request.EmployeeId);
 
-        if (EmployeeDetails is null)
+        if (employeeDetails is null)
             return Errors.ContentNotFound;
 
-        EmployeeDetails.IsActive = false;
+        employeeDetails.IsActive = false;
 
-        await _unitofWork.EmployeeBasicInfoRepository.ModifyOne(EmployeeDetails);
+        await _unitofWork.EmployeeBasicInfoRepository.ModifyOne(employeeDetails);
         await _unitofWork.SaveAsync();
 
         return Result.Success();
