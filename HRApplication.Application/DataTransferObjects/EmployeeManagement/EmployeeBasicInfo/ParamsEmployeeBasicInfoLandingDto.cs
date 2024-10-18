@@ -1,7 +1,7 @@
 using HRApplication.Application.DataTransferObjects.CommonDTO;
 namespace HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 
-public class ParamsEmployeeBasicInfoLandingDto : CommonPaginationDto
+public class ParamsEmployeeBasicInfoLandingDto : CommonPaginationParamsDto
 {
     public string? SearchText { get; set; }
     public List<long>? DepartmentIdList { get; set; }

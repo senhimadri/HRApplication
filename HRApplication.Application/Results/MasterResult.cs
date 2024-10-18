@@ -9,7 +9,7 @@ public class MasterResult
 
         IsSuccess = isSuccess;
         Error = error;
-    } 
+    }
     public bool IsSuccess { get; }
     public bool IsFailure => !IsSuccess;
     public Error Error { get; }

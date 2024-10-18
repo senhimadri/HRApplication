@@ -1,3 +1,4 @@
+using FluentValidation;
 using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.Exceptions;
 using HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
@@ -19,11 +20,11 @@ public class UpdateEmployeeBasicInfoCommandHandler : IRequestHandler<UpdateEmplo
         if (request.employeeBasicInfo is null)
             return Errors.ContentNotFound;
 
-        var validator = new UpdateEmployeeBasicInfoDtoValidator(_unitofWork);
-        var validationResult = await validator.ValidateAsync(request.employeeBasicInfo);
+        var validationResult = await new UpdateEmployeeBasicInfoDtoValidator(_unitofWork)
+                       .ValidateAsync(request.employeeBasicInfo);
 
         if (!validationResult.IsValid)
-            return Result.ValidationFailure(validationResult.ConvertValidationResult());
+            return Result.ValidationFailure(validationResult.MapToValidationErrorFormat());
 
         var _existingEmployee = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetOne(request.employeeBasicInfo.PrimaryId);
@@ -31,7 +32,7 @@ public class UpdateEmployeeBasicInfoCommandHandler : IRequestHandler<UpdateEmplo
         if (_existingEmployee is null)
             return Errors.ContentNotFound;
 
-        _existingEmployee = EmployeeBasicInfoMap.UpdateEmployee(request.employeeBasicInfo, _existingEmployee);
+        _existingEmployee.MapWithUpdateEmployeeDto(request.employeeBasicInfo);
 
         await _unitofWork.EmployeeBasicInfoRepository.ModifyOne(_existingEmployee);
         await _unitofWork.SaveAsync();

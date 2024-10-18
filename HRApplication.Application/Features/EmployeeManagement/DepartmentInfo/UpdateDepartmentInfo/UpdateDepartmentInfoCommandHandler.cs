@@ -8,7 +8,6 @@ namespace HRApplication.Application.Features.EmployeeManagement.DepartmentInfo.U
 
 public class UpdateDepartmentInfoCommandHandler : IRequestHandler<UpdateDepartmentInfoCommand, Unit>
 {
-
     private readonly IUnitofWork _unitofWork;
     public UpdateDepartmentInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
@@ -22,7 +21,6 @@ public class UpdateDepartmentInfoCommandHandler : IRequestHandler<UpdateDepartme
 
         if (!ValidationResult.IsValid)
             throw new ValidationException(ValidationResult);
-
 
         var DepartmentInformation = DepartmentInfoMap.UpdateDepartment(request.DepartmentInfo);
 

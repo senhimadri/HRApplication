@@ -1,4 +1,6 @@
 using HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
+using HRApplication.Application.DataTransferObjects.LeaveManagement;
+using HRApplication.Application.MappingProfiles.EmployeeManagement;
 using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Persistence.Repositories.CommonServices;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,9 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
     private readonly HRApplicationDBContext _dbContext;
     public EmployeeBasicInfoRepository(HRApplicationDBContext dbContext) : base(dbContext) => _dbContext = dbContext;
 
-    public async Task<TblEmployeeBasicInfo?> GetEmployeeDetailsbyId(long EmployeeId)
+    public IQueryable<TblEmployeeBasicInfo> GetEmployeeDetailsbyId(long EmployeeId)
     {
-        var employeeDetails = await GetEmployeeDetailsQuery(x => x.IntPrimaryId == EmployeeId)
-                                        .FirstOrDefaultAsync();
+        var employeeDetails = GetEmployeeDetailsQuery(x => x.IntPrimaryId == EmployeeId);
         return employeeDetails;
     }
 
@@ -38,7 +39,5 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
                                    .Where(filter);
         return employeeDetailsQuery;
     }
-
-
 }
 

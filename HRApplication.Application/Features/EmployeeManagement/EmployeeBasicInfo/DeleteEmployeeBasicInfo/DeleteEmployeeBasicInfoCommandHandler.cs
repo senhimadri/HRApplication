@@ -11,7 +11,6 @@ public class DeleteEmployeeBasicInfoCommandHandler : IRequestHandler<DeleteEmplo
     private readonly IUnitofWork _unitofWork;
     public DeleteEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
-
     public async Task<Result> Handle(DeleteEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository.GetOne(request.EmployeeId);

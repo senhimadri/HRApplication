@@ -1,11 +1,12 @@
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Domain.EmployeeManagement;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HRApplication.Application.MappingProfiles.EmployeeManagement;
 
 public static class EmployeeBasicInfoMap
 {
-    public static TblEmployeeBasicInfo CreateEmployee(CreateEmployeeBasicInfoDto data)
+    public static TblEmployeeBasicInfo MapToEmployeeEntity(this CreateEmployeeBasicInfoDto data)
     {
         return new TblEmployeeBasicInfo()
         {
@@ -20,7 +21,7 @@ public static class EmployeeBasicInfoMap
         };
     }
 
-    public static TblEmployeeBasicInfo UpdateEmployee(UpdateEmployeeBasicInfoDto input, TblEmployeeBasicInfo existing)
+    public static void MapWithUpdateEmployeeDto(this TblEmployeeBasicInfo existing, UpdateEmployeeBasicInfoDto input)
     {
         existing.StrEmployeeName = input.EmployeeName;
         existing.StrEmployeeCode = input.EmployeeCode;
@@ -29,47 +30,43 @@ public static class EmployeeBasicInfoMap
         existing.IntDesignationId = input.DesignationId;
         existing.IntGenderId = input.GenderId;
         existing.IntReligionId = input.ReligionId;
-
-        return existing;
     }
 
-    public static GetEmployeeBasicInfoDto GetEmployee(TblEmployeeBasicInfo data)
+    public static IQueryable<GetEmployeeBasicInfoDto> MapToEmployeeBasicInfoDto(this IQueryable<TblEmployeeBasicInfo> query)
     {
-        return new GetEmployeeBasicInfoDto()
-        {
-            PrimaryId = data.IntPrimaryId,
-            EmployeeName = data.StrEmployeeName,
-            EmployeeCode = data.StrEmployeeCode,
-            DateOfBirth = data.DteDateOfBirth,
-
-            DepartmentId = data.IntDepartmentId,
-            Department = data.TblDepartmentInfo?.StrDepartmentName,
-
-            DesignationId = data.IntDesignationId,
-            Designation = data.TblDesignationInfo?.StrDesignationName,
-
-            GenderId = data.IntGenderId,
-            Gender = data.TblGenderInfo?.StrGenderName,
-
-            ReligionId = data.IntReligionId,
-            Religion = data.TblReligionInfo?.StrReligionName
-        };
-    }
-
-    public static List<GetEmployeeBasicInfoLandingDto> GetEmployeeList(IList<TblEmployeeBasicInfo> data)
-    {
-        var map = data.Select(x => new GetEmployeeBasicInfoLandingDto
+        return query.Select(x => new GetEmployeeBasicInfoDto
         {
             PrimaryId = x.IntPrimaryId,
             EmployeeName = x.StrEmployeeName,
             EmployeeCode = x.StrEmployeeCode,
             DateOfBirth = x.DteDateOfBirth,
-            Department = (x.TblDepartmentInfo?.StrDepartmentName),
-            Designation = x.TblDesignationInfo?.StrDesignationName,
-            Gender = x.TblGenderInfo?.StrGenderName,
-            Religion = x.TblReligionInfo?.StrReligionName
-        }).ToList();
 
-        return map;
+            DepartmentId = x.IntDepartmentId,
+            Department = x.TblDepartmentInfo != null ? x.TblDepartmentInfo.StrDepartmentName : null,
+
+            DesignationId = x.IntDesignationId,
+            Designation = x.TblDesignationInfo != null ? x.TblDesignationInfo.StrDesignationName : null,
+
+            GenderId = x.IntGenderId,
+            Gender = x.TblGenderInfo != null ? x.TblGenderInfo.StrGenderName : null,
+
+            ReligionId = x.IntReligionId,
+            Religion = x.TblReligionInfo != null ? x.TblReligionInfo.StrReligionName : null
+        });
+    }
+
+    public static IQueryable<GetEmployeeBasicInfoLandingDto> MapToEmployeeLandingDto(this IQueryable<TblEmployeeBasicInfo> query)
+    {
+        return query.Select(x => new GetEmployeeBasicInfoLandingDto
+        {
+            PrimaryId = x.IntPrimaryId,
+            EmployeeName = x.StrEmployeeName,
+            EmployeeCode = x.StrEmployeeCode,
+            DateOfBirth = x.DteDateOfBirth,
+            Department = x.TblDepartmentInfo != null ? x.TblDepartmentInfo.StrDepartmentName : null,
+            Designation = x.TblDesignationInfo != null ? x.TblDesignationInfo.StrDesignationName : null,
+            Gender = x.TblGenderInfo != null ? x.TblGenderInfo.StrGenderName : null,
+            Religion = x.TblReligionInfo != null ? x.TblReligionInfo.StrReligionName : null
+        });
     }
 }

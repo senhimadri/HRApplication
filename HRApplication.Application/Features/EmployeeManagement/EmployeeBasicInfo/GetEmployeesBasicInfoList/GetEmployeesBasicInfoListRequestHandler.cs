@@ -1,4 +1,5 @@
 using HRApplication.Application.Contracts.Parsistence;
+using HRApplication.Application.DataTransferObjects.CommonDTO;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.Helper;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
@@ -12,14 +13,14 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<List<GetEmployeeBasicInfoLandingDto>>>
+public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<GetLandingPagination<GetEmployeeBasicInfoLandingDto>>>
 {
     private readonly IUnitofWork _unitofWork;
 
     public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
 
 
-    public async Task<Result<List<GetEmployeeBasicInfoLandingDto>>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
+    public async Task<Result<GetLandingPagination<GetEmployeeBasicInfoLandingDto>>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
         if (request.LandingParameeter is null)
             return Errors.ContentNotFound;
@@ -28,12 +29,12 @@ public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmploy
 
         var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
                                     .GetEmployeeDetailsQuery(Filter)
-                                    .Pagination(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize)
-                                    .ToListAsync();
-        if (EmployeeDetails is null)
+                                    .MapToEmployeeLandingDto()
+                                    .ToPagination(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
+        if (EmployeeDetails.Data is null || !EmployeeDetails.Data.Any())
             return Errors.ContentNotFound;
 
-        return EmployeeBasicInfoMap.GetEmployeeList(EmployeeDetails);
+        return EmployeeDetails;
     }
 
 

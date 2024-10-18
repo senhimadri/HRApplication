@@ -47,7 +47,7 @@ public class DepartmentInfoController : ControllerBase
 
     [HttpGet]
     [Route("LandingDepartmentList")]
-    public async Task<IActionResult> LandingDepartmentList (string? _searchtext)
+    public async Task<IActionResult> LandingDepartmentList(string? _searchtext)
     {
         var request = new GetDepartmentInfoListRequest { SearchText = _searchtext };
         var response = await _mediator.Send(request);
@@ -60,6 +60,6 @@ public class DepartmentInfoController : ControllerBase
     {
         var request = new GetDepartmentInfoDetailsByIdRequest { DepartmentId = _departmentId };
         var response = await _mediator.Send(request);
-        return Ok(response); 
+        return Ok(response);
     }
 }
