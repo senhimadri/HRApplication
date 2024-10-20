@@ -2,12 +2,12 @@
 
 public static class Errors
 {
-    public static readonly Error ContentNotFound = new Error(404, "Content not found.");
-    public static readonly Error BadRequest = new Error(400, "Bad request.");
-    public static readonly Error InternalServerError = new Error(500, "Internal server error.");
-    public static readonly Error UnauthorizedAccess = new Error(401, "Unauthorized access.");
-    public static readonly Error Forbidden = new Error(403, "Forbidden access.");
-    public static readonly Error ValidationFailed = new Error(422, "Validation failed.");
-    public static Error NewError(int Code, string message) => new Error(Code, message);
+    public static readonly OperationError ContentNotFound = new OperationError(404, "Content not found.");
+    public static readonly OperationError BadRequest = new OperationError(400, "Bad request.");
+    public static readonly OperationError InternalServerError = new OperationError(500, "Internal server error.");
+    public static readonly OperationError UnauthorizedAccess = new OperationError(401, "Unauthorized access.");
+    public static readonly OperationError Forbidden = new OperationError(403, "Forbidden access.");
+    public static readonly OperationError ValidationFailed = new OperationError(422, "Validation failed.");
+    public static OperationError NewError(int Code, string message) => new OperationError(Code, message);
 }
 

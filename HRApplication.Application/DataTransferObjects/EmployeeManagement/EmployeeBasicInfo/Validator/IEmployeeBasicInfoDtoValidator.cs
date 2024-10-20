@@ -16,14 +16,14 @@ public class IEmployeeBasicInfoDtoValidator : AbstractValidator<IEmployeeBasicIn
 
         RuleFor(x => x.EmployeeCode)
             .NotEmpty().NotNull().WithMessage("{PropertyName} shouldn't be empty")
-            .Length(0, 50).WithMessage("Employee Code shouldn't be more than 50")
-            .MustAsync(async (empCode, token) =>
-            {
-                var employeeCodeExit = await _unitOfWork
-                        .EmployeeBasicInfoRepository
-                        .GetCount(x => x.StrEmployeeCode == empCode);
-                return employeeCodeExit == 0;
-            }).WithMessage("Employee Code is already exit");
+            .Length(0, 50).WithMessage("Employee Code shouldn't be more than 50");
+            //.MustAsync(async (empCode, token) =>
+            //{
+            //    var employeeCodeExit = await _unitOfWork
+            //            .EmployeeBasicInfoRepository
+            //            .GetCount(x => x.StrEmployeeCode == empCode);
+            //    return employeeCodeExit == 0;
+            //}).WithMessage("Employee Code is already exit");
 
         RuleFor(x => x.DateOfBirth)
             .NotNull().NotEmpty().WithMessage("{PropertyName} shouldn't be empty");

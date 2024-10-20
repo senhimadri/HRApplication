@@ -28,8 +28,8 @@ public class EmployeeBasicInfoController : ControllerBase
 
         return response.Match(
             onSuccess: () => Ok(),
-            onValidationFailure: validationErrors => BadRequest(validationErrors),
-            onFailure: error => BadRequest(error.Description)
+            onValidationFailure: validationErrors => ValidationProblem(validationErrors),
+            onFailure: error => BadRequest(error)
         );
     }
 
@@ -41,10 +41,10 @@ public class EmployeeBasicInfoController : ControllerBase
         var response = await _mediator.Send(command);
 
         return response.Match(
-             onSuccess: () => Ok(),
-             onValidationFailure: validationErrors => BadRequest(validationErrors),
-             onFailure: error => BadRequest(error.Description)
-         );
+            onSuccess: () => Ok(),
+            onValidationFailure: validationErrors => ValidationProblem(validationErrors),
+            onFailure: error => BadRequest(error)
+        );
     }
 
     [HttpDelete]

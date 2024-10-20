@@ -1,20 +1,19 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using HRApplication.Application.Results;
 
 namespace HRApplication.Application.Helper;
 
 public static class ValidationExtensions
 {
-    public static List<ValidationError> ToValidationErrorList(this FluentValidation.Results.ValidationResult validationResult)
+    public static Dictionary<string, string[]> ToValidationErrorList(this ValidationResult validationResult)
     {
-        var result = validationResult.Errors.Select(x => new ValidationError
-        {
-            PropertyName = x.PropertyName,
-            Message = x.ErrorMessage
-        }).ToList();
+        var errors = validationResult.Errors
+                   .GroupBy(e => e.PropertyName)
+                   .ToDictionary(
+                       group => group.Key,
+                       group => group.Select(e => e.ErrorMessage).ToArray());
 
-        return result;
+        return errors;
     }
 
     public static async Task<ValidationResult> ValidateAndReturnResultAsync<T>(this IValidator<T> validator, T instance)

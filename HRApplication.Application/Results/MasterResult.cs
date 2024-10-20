@@ -2,9 +2,9 @@
 
 public class MasterResult
 {
-    protected MasterResult(bool isSuccess, Error error)
+    protected MasterResult(bool isSuccess, OperationError error)
     {
-        if (isSuccess && error != Error.None || !isSuccess && error == Error.None)
+        if (isSuccess && error != OperationError.None || !isSuccess && error == OperationError.None)
             throw new ArgumentException("Invalid error.");
 
         IsSuccess = isSuccess;
@@ -12,6 +12,6 @@ public class MasterResult
     }
     public bool IsSuccess { get; }
     public bool IsFailure => !IsSuccess;
-    public Error Error { get; }
+    public OperationError Error { get; }
 }
 
