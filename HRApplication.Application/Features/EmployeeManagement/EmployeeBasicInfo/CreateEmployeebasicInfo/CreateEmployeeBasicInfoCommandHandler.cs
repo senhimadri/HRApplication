@@ -6,10 +6,9 @@ using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.CreateEmployeebasicInfo;
 
-public class CreateEmployeeBasicInfoCommandHandler : IRequestHandler<CreateEmployeeBasicInfoCommand, Result>
+public class CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) : IRequestHandler<CreateEmployeeBasicInfoCommand, Result>
 {
-    private readonly IUnitofWork _unitofWork;
-    public CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
+    private readonly IUnitofWork _unitofWork = unitofWork;
 
     public async Task<Result> Handle(CreateEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {

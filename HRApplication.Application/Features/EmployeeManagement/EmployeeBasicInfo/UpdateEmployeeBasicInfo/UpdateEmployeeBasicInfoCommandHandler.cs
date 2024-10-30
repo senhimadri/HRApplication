@@ -9,11 +9,9 @@ using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.UpdateEmployeeBasicInfo;
 
-public class UpdateEmployeeBasicInfoCommandHandler : IRequestHandler<UpdateEmployeeBasicInfoCommand, Result>
+public class UpdateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) : IRequestHandler<UpdateEmployeeBasicInfoCommand, Result>
 {
-    private readonly IUnitofWork _unitofWork;
-
-    public UpdateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
+    private readonly IUnitofWork _unitofWork = unitofWork;
 
     public async Task<Result> Handle(UpdateEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {

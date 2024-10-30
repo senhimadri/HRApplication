@@ -6,10 +6,9 @@ using MediatR;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.DeleteEmployeeBasicInfo;
 
-public class DeleteEmployeeBasicInfoCommandHandler : IRequestHandler<DeleteEmployeeBasicInfoCommand, Result>
+public class DeleteEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) : IRequestHandler<DeleteEmployeeBasicInfoCommand, Result>
 {
-    private readonly IUnitofWork _unitofWork;
-    public DeleteEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
+    private readonly IUnitofWork _unitofWork = unitofWork;
 
     public async Task<Result> Handle(DeleteEmployeeBasicInfoCommand request, CancellationToken cancellationToken)
     {

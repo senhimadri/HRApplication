@@ -14,12 +14,9 @@ using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
 
-public class GetEmployeesBasicInfoListRequestHandler : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<GetLandingPagination<GetEmployeeBasicInfoLandingDto>>>
+public class GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) : IRequestHandler<GetEmployeesBasicInfoListRequest, Result<GetLandingPagination<GetEmployeeBasicInfoLandingDto>>>
 {
-    private readonly IUnitofWork _unitofWork;
-
-    public GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) => _unitofWork = unitofWork;
-
+    private readonly IUnitofWork _unitofWork = unitofWork;
 
     public async Task<Result<GetLandingPagination<GetEmployeeBasicInfoLandingDto>>> Handle(GetEmployeesBasicInfoListRequest request, CancellationToken cancellationToken)
     {
