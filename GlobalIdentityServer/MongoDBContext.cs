@@ -7,7 +7,7 @@ public class MongoDBContext
 {
     private readonly IMongoDatabase _database;
 
-    public MongoDBContext(IMongoClient client, IOptions<MongoDBSettings> settings)
+    public MongoDBContext(IMongoClient client, IOptions<MongoDbSettings> settings)
     {
         _database = client.GetDatabase(settings.Value.DatabaseName);
     }

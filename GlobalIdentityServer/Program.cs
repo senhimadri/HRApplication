@@ -1,4 +1,5 @@
 using GlobalIdentityServer;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("ConnectionStrings"));
-builder.Services.AddSingleton<IMongoClient, MongoClient>(s =>
-    new MongoClient(builder.Configuration.GetValue<string>("ConnectionStrings:MongoDB")));
+builder.Services.Configure<MongoDbSettings>(
+    builder.Configuration.GetSection("MongoDbSettings"));
+
+
+builder.Services.AddSingleton<IMongoClient>(s =>
+{
+    var mongoSettings = s.GetRequiredService<IOptions<MongoDbSettings>>().Value;
+    var connectionString = $"mongodb://{mongoSettings.Username}:{mongoSettings.Password}@{mongoSettings.Host}:{mongoSettings.Port}/?authSource=admin";
+    return new MongoClient(connectionString);
+});
 
 builder.Services.AddSingleton<MongoDBContext>();
 
