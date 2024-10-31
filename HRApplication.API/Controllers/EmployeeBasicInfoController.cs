@@ -81,9 +81,6 @@ public class EmployeeBasicInfoController : ControllerBase
         var request = new GetEmployeeBasicInfoDetailsByIdRequest { EmployeeId = _employeeId };
         var response = await _mediator.Send(request);
 
-        return response.Match(
-                     onSuccess: data => Ok(data),
-                     onFailure: error => BadRequest(error)
-                 );
+        return Ok(response);
     }
 }
