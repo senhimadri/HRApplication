@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using GlobalIdentityServer.Models;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace GlobalIdentityServer;
@@ -12,5 +13,5 @@ public class MongoDBContext
         _database = client.GetDatabase(settings.Value.DatabaseName);
     }
 
-    public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+    public IMongoCollection<UserInformation> UserInformation => _database.GetCollection<UserInformation>("UserInformation");
 }

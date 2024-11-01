@@ -1,4 +1,5 @@
 using GlobalIdentityServer;
+using GlobalIdentityServer.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -37,38 +38,39 @@ app.UseHttpsRedirection();
 
 app.MapGet("/api/users", async (MongoDBContext context) =>
 {
-    var users = await context.Users.Find(_ => true).ToListAsync();
+    var users = await context.UserInformation.Find(_ => true).ToListAsync();
     return Results.Ok(users);
 });
 
-app.MapGet("/api/users/{id}", async (string id, MongoDBContext context) =>
+app.MapGet("/api/users/{id}", async (Guid id, MongoDBContext context) =>
 {
-    var user = await context.Users.Find(u => u.Id == id).FirstOrDefaultAsync();
+    var user = await context.UserInformation.Find(u => u.Id == id).FirstOrDefaultAsync();
     return user is not null ? Results.Ok(user) : Results.NotFound();
 });
 
-app.MapPost("/api/users", async (User user, MongoDBContext context) =>
+app.MapPost("/api/users", async (UserInformation user, MongoDBContext context) =>
 {
-    await context.Users.InsertOneAsync(user);
+    await context.UserInformation.InsertOneAsync(user);
     return Results.Created($"/api/users/{user.Id}", user);
 });
 
-app.MapPut("/api/users/{id}", async (string id, User updatedUser, MongoDBContext context) =>
+app.MapPut("/api/users/{id}", async (Guid id, UserInformation updatedUser, MongoDBContext context) =>
 {
-    var existingUser = await context.Users.Find(u => u.Id == id).FirstOrDefaultAsync();
-    if (existingUser is null) return Results.NotFound();
+    var existingUser = await context.UserInformation.Find(u => u.Id == id).FirstOrDefaultAsync();
+    if (existingUser is null)
+        return Results.NotFound();
 
     updatedUser.Id = id; // Ensure the ID remains the same
-    await context.Users.ReplaceOneAsync(u => u.Id == id, updatedUser);
+    await context.UserInformation.ReplaceOneAsync(u => u.Id == id, updatedUser);
     return Results.NoContent();
 });
 
-app.MapDelete("/api/users/{id}", async (string id, MongoDBContext context) =>
+app.MapDelete("/api/users/{id}", async (Guid id, MongoDBContext context) =>
 {
-    var user = await context.Users.Find(u => u.Id == id).FirstOrDefaultAsync();
+    var user = await context.UserInformation.Find(u => u.Id == id).FirstOrDefaultAsync();
     if (user is null) return Results.NotFound();
 
-    await context.Users.DeleteOneAsync(u => u.Id == id);
+    await context.UserInformation.DeleteOneAsync(u => u.Id == id);
     return Results.NoContent();
 });
 
