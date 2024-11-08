@@ -4,14 +4,8 @@ using MongoDB.Driver;
 
 namespace GlobalIdentityServer;
 
-public class MongoDBContext
+public class MongoDbContext(IMongoClient client, IOptions<MongoDbSettings> settings) 
 {
-    private readonly IMongoDatabase _database;
-
-    public MongoDBContext(IMongoClient client, IOptions<MongoDbSettings> settings)
-    {
-        _database = client.GetDatabase(settings.Value.DatabaseName);
-    }
-
+    private readonly IMongoDatabase _database= client.GetDatabase(settings.Value.DatabaseName);
     public IMongoCollection<UserInformation> UserInformation => _database.GetCollection<UserInformation>("UserInformation");
 }

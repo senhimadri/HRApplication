@@ -1,6 +1,6 @@
-using FluentValidation.Results;
 using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.DataTransferObjects.CommonDTO;
+using HRApplication.Application.DataTransferObjects.EmployeeManagement.EmployeeBasicInfo;
 using HRApplication.Application.DataTransferObjects.LeaveManagement;
 using HRApplication.Application.Helper;
 using HRApplication.Application.MappingProfiles.EmployeeManagement;
@@ -8,8 +8,6 @@ using HRApplication.Application.Results;
 using HRApplication.Domain.EmployeeManagement;
 using LinqKit;
 using MediatR;
-using System.Data.Entity;
-using System.Drawing.Printing;
 using System.Linq.Expressions;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeesBasicInfoList;
@@ -23,21 +21,26 @@ public class GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) : I
         if (request.LandingParameeter is null)
             return Errors.ContentNotFound;
 
-        var Filter = GetFilter(request);
+        var employeeLandingFilter = BuildEmployeeLandingFilter(request);
 
-        var EmployeeDetails = await _unitofWork.EmployeeBasicInfoRepository
-                                    .GetEmployeeDetailsQuery(Filter)
-                                    .MapToEmployeeLandingDto()
-                                    .ToPaginatedResultAsync(request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
+        var employeeDetails = await FetchEmployeeDetails(employeeLandingFilter, request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
 
-        if (EmployeeDetails.Data is null || !EmployeeDetails.Data.Any())
+        if (employeeDetails.Data is null || !employeeDetails.Data.Any())
             return Errors.ContentNotFound;
 
-        return EmployeeDetails;
+        return employeeDetails;
     }
 
 
-    private Expression<Func<TblEmployeeBasicInfo, bool>> GetFilter(GetEmployeesBasicInfoListRequest request)
+    private async Task<GetLandingPagination<GetEmployeeBasicInfoLandingDto>> FetchEmployeeDetails(Expression<Func<TblEmployeeBasicInfo, bool>> filter, int PageNo,int PageSize)
+    {
+        return await _unitofWork.EmployeeBasicInfoRepository
+                                .GetEmployeeDetailsQuery(filter)
+                                .MapToEmployeeLandingDto()
+                                .ToPaginatedResultAsync(PageNo, PageSize);
+    }
+
+    private Expression<Func<TblEmployeeBasicInfo, bool>> BuildEmployeeLandingFilter(GetEmployeesBasicInfoListRequest request)
     {
         var filter = PredicateBuilder.New<TblEmployeeBasicInfo>(true);
 
@@ -54,7 +57,6 @@ public class GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) : I
 
         if (request.LandingParameeter?.DepartmentIdList?.Any() == true)
             filter = filter.And(x => request.LandingParameeter.DepartmentIdList.Contains(x.IntDepartmentId));
-
 
         if (request.LandingParameeter?.DesignationIdList?.Any() == true)
             filter = filter.And(x => request.LandingParameeter.DesignationIdList.Contains(x.IntDesignationId));

@@ -26,6 +26,7 @@ public class CreateEmployeeBasicInfoCommandHandler(IUnitofWork unitofWork) : IRe
         employeeBasicInfo = await _unitofWork.EmployeeBasicInfoRepository.InsertOne(employeeBasicInfo);
 
         await _unitofWork.SaveAsync();
+
         return Result.Success();
     }
 }
