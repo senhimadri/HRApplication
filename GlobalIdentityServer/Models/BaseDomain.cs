@@ -1,21 +1,10 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace GlobalIdentityServer.Models.CommonModel;
+namespace GlobalIdentityServer.Models;
 
 public class BaseDomain
 {
-    public BaseDomain(BaseDomain _baseDomain)
-    {
-        Id = _baseDomain.Id;
-        CreatedAt = _baseDomain.CreatedAt;
-        CreatedBy = _baseDomain.CreatedBy;
-        UpdatedAt = _baseDomain.UpdatedAt;
-        UpdatedBy = _baseDomain.UpdatedBy;
-        IsActive = _baseDomain.IsActive;
-    }
-
-
     [BsonId]
     [BsonRepresentation(BsonType.String)]
     public Guid Id { get; set; }

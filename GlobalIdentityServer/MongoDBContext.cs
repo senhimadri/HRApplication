@@ -1,5 +1,4 @@
 ﻿using GlobalIdentityServer.Models;
-using GlobalIdentityServer.Models.CommonModel;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

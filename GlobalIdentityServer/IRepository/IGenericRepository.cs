@@ -1,4 +1,4 @@
-﻿using GlobalIdentityServer.Models.CommonModel;
+﻿using GlobalIdentityServer.Models;
 using System.Linq.Expressions;
 
 namespace GlobalIdentityServer.Repository.CommonRepository;
