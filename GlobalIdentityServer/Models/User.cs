@@ -1,21 +1,28 @@
-﻿using MongoDB.Bson;
+﻿using GlobalIdentityServer.Models.CommonModel;
+using Microsoft.AspNetCore.Identity;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace GlobalIdentityServer.Models;
 
-public class UserInformation
+public class UserInformation : BaseDomain
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.String)]
-    public Guid Id { get; set; }
+
+    public UserInformation(UserInformation _information) : base(_information)
+    {
+        Username = _information.Username;
+        PasswordHash = _information.PasswordHash;
+        UserRole = _information.UserRole;
+    }
     public string? Username { get; set; }
     public string? PasswordHash { get; set; }
-    public string? Email { get; set; }
-    public bool IsVerified { get; set; }
 
-    [BsonRepresentation(BsonType.String)]
-    public DateTime CreatedAt { get; set; }
+    public UserRole UserRole { get; set; }
 
-    [BsonRepresentation(BsonType.String)]
-    public DateTime UpdatedAt { get; set; }
+
+}
+
+public enum UserRole
+{
+    SuperAdmin, TenantAdmin, User
 }

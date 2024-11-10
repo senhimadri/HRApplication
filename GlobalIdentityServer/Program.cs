@@ -1,5 +1,7 @@
 using GlobalIdentityServer;
+using GlobalIdentityServer.DataTransferObject.Users;
 using GlobalIdentityServer.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -48,20 +50,21 @@ app.MapGet("/api/users/{id}", async (Guid id, MongoDbContext context) =>
     return user is not null ? Results.Ok(user) : Results.NotFound();
 });
 
-app.MapPost("/api/users", async (UserInformation user, MongoDbContext context) =>
+app.MapPost("/api/users", async (CreateUserDto userInput, MongoDbContext context) =>
 {
-    await context.UserInformation.InsertOneAsync(user);
-    return Results.Created($"/api/users/{user.Id}", user);
+    return;
 });
 
-app.MapPut("/api/users/{id}", async (Guid id, UserInformation updatedUser, MongoDbContext context) =>
+app.MapPut("/api/users/{id}", async (UpdateUserDto updatedUser, MongoDbContext context) =>
 {
-    var existingUser = await context.UserInformation.Find(u => u.Id == id).FirstOrDefaultAsync();
+    var existingUser = context.UserInformation.Find(u => u.Id == updatedUser.Id).FirstOrDefaultAsync();
+
     if (existingUser is null)
         return Results.NotFound();
 
-    updatedUser.Id = id; // Ensure the ID remains the same
-    await context.UserInformation.ReplaceOneAsync(u => u.Id == id, updatedUser);
+    var newCollection = new UserInformation(existingUser.Result);
+    // Ensure the ID remains the same
+    await context.UpdateAsync(newCollection);
     return Results.NoContent();
 });
 
