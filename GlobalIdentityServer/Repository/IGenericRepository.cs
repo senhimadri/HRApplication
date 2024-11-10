@@ -1,7 +1,7 @@
 ﻿using GlobalIdentityServer.Models;
 using System.Linq.Expressions;
 
-namespace GlobalIdentityServer.Repository.CommonRepository;
+namespace GlobalIdentityServer.Repository;
 
 public interface IGenericRepository<T> where T : BaseDomain
 {
