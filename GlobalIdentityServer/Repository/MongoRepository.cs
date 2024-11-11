@@ -4,8 +4,8 @@ using System.Linq.Expressions;
 
 namespace GlobalIdentityServer.Repository;
 
-public class GenericRepository<T>(IMongoDatabase database, string collectionName)
-                                                        : IGenericRepository<T> where T : BaseDomain
+public class MongoRepository<T>(IMongoDatabase database, string collectionName)
+                                                        : IRepository<T> where T : BaseDomain
 {
     private readonly IMongoCollection<T> dbCollection = database.GetCollection<T>(collectionName);
     private readonly FilterDefinitionBuilder<T> filterBuilder = Builders<T>.Filter;
@@ -39,4 +39,7 @@ public class GenericRepository<T>(IMongoDatabase database, string collectionName
 
     public async Task RemoveAsync(Guid id)
                                     => await dbCollection.DeleteOneAsync(filter: x => x.Id == id);
+
+    public async Task<bool> IsExist(Expression<Func<T, bool>> filter)
+        => await dbCollection.Find(filter).AnyAsync();
 }

@@ -4,7 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace GlobalIdentityServer.Models;
 
-public class TblUser : BaseDomain
+public class TblUserInformation : BaseDomain
 {
     public string? Username { get; set; }
     public string? PasswordHash { get; set; }

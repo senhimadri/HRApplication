@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace GlobalIdentityServer.Repository;
 
-public interface IGenericRepository<T> where T : BaseDomain
+public interface IRepository<T> where T : BaseDomain
 {
     Task CreateAsync(T entity);
     Task<IReadOnlyCollection<T>> GetAllAsync();
@@ -11,4 +11,5 @@ public interface IGenericRepository<T> where T : BaseDomain
     Task<T> GetAsync(Guid id);
     Task RemoveAsync(Guid id);
     Task UpdateAsync(T entity);
+    Task<bool> IsExist(Expression<Func<T, bool>> filter);
 }
