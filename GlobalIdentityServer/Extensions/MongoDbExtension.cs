@@ -1,9 +1,7 @@
 ﻿using GlobalIdentityServer.Models;
 using GlobalIdentityServer.Repository;
-using GlobalIdentityServer.Services.UserRegistration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using System.Collections;
 
 namespace GlobalIdentityServer.Extensions;
 
