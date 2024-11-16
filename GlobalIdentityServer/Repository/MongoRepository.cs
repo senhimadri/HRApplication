@@ -29,6 +29,9 @@ public class MongoRepository<T>(IMongoDatabase database, string collectionName)
     public async Task<T> GetAsync(Guid id)
                                     => await dbCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
+    public async Task<T> GetAsync(Expression<Func<T, bool>> filter)
+                                => await dbCollection.Find(filter).FirstOrDefaultAsync();
+
     public async Task UpdateAsync(T entity)
     {
         entity.UpdatedAt = DateTime.UtcNow;

@@ -1,6 +1,6 @@
 ﻿using GlobalIdentityServer.DataTransferObject.Users;
+using GlobalIdentityServer.IServices;
 using GlobalIdentityServer.Models;
-using GlobalIdentityServer.Services.UserRegistration;
 
 namespace GlobalIdentityServer.Apis;
 
@@ -32,9 +32,9 @@ public static class UserRegistrationApi
             return user is not null ? Results.Ok(user) : Results.NotFound();
         });
 
-        app.MapGet("/users", async (UserRole role, string searchText, IUserRegistration userService) =>
+        app.MapGet("/users", async (string searchText, IUserRegistration userService) =>
         {
-            var users = await userService.UsersLandingPagination(role, searchText);
+            var users = await userService.UsersLandingPagination(searchText);
             return Results.Ok(users);
         });
 

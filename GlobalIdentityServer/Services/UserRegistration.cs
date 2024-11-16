@@ -1,17 +1,18 @@
 ﻿using GlobalIdentityServer.DataTransferObject.Global;
 using GlobalIdentityServer.DataTransferObject.Users;
+using GlobalIdentityServer.IServices;
 using GlobalIdentityServer.Mapper;
 using GlobalIdentityServer.Models;
 using GlobalIdentityServer.Repository;
 using HRApplication.GlobalIdentityServer.Results;
 
-namespace GlobalIdentityServer.Services.UserRegistration;
+namespace GlobalIdentityServer.Services;
 
 public class UserRegistration : IUserRegistration
 {
     public IRepository<UserInformation> _userRepository;
 
-    public UserRegistration(IRepository<UserInformation> _userRepository) 
+    public UserRegistration(IRepository<UserInformation> _userRepository)
                                         => this._userRepository = _userRepository;
 
     public async Task<Result> CreateUser(CreateUserDto input)
@@ -67,7 +68,7 @@ public class UserRegistration : IUserRegistration
 
     }
 
-    public Task<GetLandingPagination<UserLandingDataDto>> UsersLandingPagination(UserRole role, string searchText)
+    public Task<GetLandingPagination<UserLandingDataDto>> UsersLandingPagination(string searchText)
     {
         throw new NotImplementedException();
     }

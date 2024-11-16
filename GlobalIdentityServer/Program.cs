@@ -1,7 +1,8 @@
 using GlobalIdentityServer.Apis;
 using GlobalIdentityServer.Extensions;
+using GlobalIdentityServer.IServices;
 using GlobalIdentityServer.Models;
-using GlobalIdentityServer.Services.UserRegistration;
+using GlobalIdentityServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMongo(builder.Configuration).AddMongoRepository<UserInformation>("TblUserInformation"); 
 
 builder.Services.AddSingleton<IUserRegistration, UserRegistration>();
+builder.Services.AddSingleton<IUserLogin, UserLogin>();
+builder.Services.AddSingleton<ITokenService, TokenService>();
 
 var app = builder.Build();
 
@@ -25,6 +28,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.MapUserApi();
+app.MapUserLoginApi();
 
 app.Run();
 
