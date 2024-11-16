@@ -5,21 +5,35 @@ namespace GlobalIdentityServer.Mapper;
 
 public static class UserRegistrationMapper
 {
-    public static TblUserInformation MapUserDtoToUserEntity(this CreateUserDto dto)
+    public static UserInformation MapUserDtoToUserEntity(this CreateUserDto dto)
     {
-        return new TblUserInformation()
+        return new UserInformation()
         {
             Username = dto.Username,
             PasswordHash = dto.Password,
-            UserRole = dto.UserRole,
+            Email = dto.Email,
+            IsEmailVerified = true,
+            IsLocked = false
+
         };
     }
 
-    public static TblUserInformation MapWithUserDto(this TblUserInformation entity, UpdateUserDto dto)
+    public static UserInformation MapWithUserDto(this UserInformation entity, UpdateUserDto dto)
     {
         entity.Username = dto.Username;
         entity.PasswordHash = dto.Password;
-        entity.UserRole = dto.UserRole;
+        entity.Email = dto.Email;
         return entity;
+    }
+
+    public static UserGetByDto MapUserEntityToUserDto(this UserInformation entity)
+    {
+       return  new UserGetByDto
+        {
+            Id = entity.Id,
+            Username = entity.Username,
+            Password = entity.PasswordHash,
+            Email = entity.Email
+        };
     }
 }

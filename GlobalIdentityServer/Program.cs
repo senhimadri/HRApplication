@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMongo(builder.Configuration).AddMongoRepository<TblUserInformation>("TblUserInformation"); 
+builder.Services.AddMongo(builder.Configuration).AddMongoRepository<UserInformation>("TblUserInformation"); 
 
 builder.Services.AddSingleton<IUserRegistration, UserRegistration>();
 

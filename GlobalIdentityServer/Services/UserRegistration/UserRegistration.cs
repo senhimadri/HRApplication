@@ -9,9 +9,9 @@ namespace GlobalIdentityServer.Services.UserRegistration;
 
 public class UserRegistration : IUserRegistration
 {
-    public IRepository<TblUserInformation> _userRepository;
+    public IRepository<UserInformation> _userRepository;
 
-    public UserRegistration(IRepository<TblUserInformation> _userRepository) 
+    public UserRegistration(IRepository<UserInformation> _userRepository) 
                                         => this._userRepository = _userRepository;
 
     public async Task<Result> CreateUser(CreateUserDto input)
@@ -35,14 +35,21 @@ public class UserRegistration : IUserRegistration
         if (existingUser is null)
             return Errors.ContentNotFound;
 
-        await _userRepository.RemoveAsync(existingUser.Id);
+        existingUser.IsActive = false;
+
+        await _userRepository.UpdateAsync(existingUser);
 
         return Result.Success();
     }
 
-    public Task<UserGetByDto> GetUserById(Guid id)
+    public async Task<UserGetByDto> GetUserById(Guid id)
     {
-        throw new NotImplementedException();
+        var userInfo = await _userRepository.GetAsync(id);
+
+        if (userInfo is null)
+            return new UserGetByDto();
+
+        return userInfo.MapUserEntityToUserDto();
     }
 
     public async Task<Result> UpdateUser(UpdateUserDto input)

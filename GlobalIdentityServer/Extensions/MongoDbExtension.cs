@@ -1,6 +1,9 @@
 ﻿using GlobalIdentityServer.Models;
 using GlobalIdentityServer.Repository;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace GlobalIdentityServer.Extensions;
@@ -9,6 +12,10 @@ public static class MongoDbExtension
 {
     public static IServiceCollection AddMongo(this IServiceCollection services, IConfiguration configuration)
     {
+        BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+        BsonSerializer.RegisterSerializer(new DateTimeOffsetSerializer(BsonType.String));
+        BsonSerializer.RegisterSerializer(new DateTimeSerializer(BsonType.String));
+
         services.Configure<MongoDbSettings>(
             configuration.GetSection("MongoDbSettings"));
 
