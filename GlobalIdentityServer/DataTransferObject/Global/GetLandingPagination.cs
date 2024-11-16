@@ -1,4 +1,4 @@
-﻿namespace HRApplication.Application.DataTransferObjects.CommonDTO;
+﻿namespace GlobalIdentityServer.DataTransferObject.Global;
 
 public class GetLandingPagination<T>
 {

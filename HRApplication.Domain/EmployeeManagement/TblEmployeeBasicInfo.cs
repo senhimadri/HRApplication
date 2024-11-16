@@ -1,4 +1,5 @@
 ﻿using HRApplication.Domain.CommonDomain;
+using HRApplication.Domain.IdentityInformation;
 using HRApplication.Domain.LeaveManagement;
 
 namespace HRApplication.Domain.EmployeeManagement;
@@ -19,5 +20,8 @@ public class TblEmployeeBasicInfo : BaseDomainEntity
     public TblReligionInfo? TblReligionInfo { get; set; }
     public ICollection<TblLeaveBalance>? TblLeaveBalance { get; set; }
     public ICollection<TblLeaveApplication>? TblLeaveApplication { get; set; }
+
+    public Guid? UserId { get; set; }
+    public TblUserInformation? TblUserInformation { get; set; }
 }
 

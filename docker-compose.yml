@@ -3,14 +3,26 @@ version: '3.8'
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: sql_server_2019
+    container_name: sqlserver
     ports:
       - "1433:1433"
     environment:
-      SA_PASSWORD: "YourStrong!Password"
+      SA_PASSWORD: "S3cur3P@ssw0rd!"
       ACCEPT_EULA: "Y"
     volumes:
       - sql_data:/var/opt/mssql
 
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "S3cur3M0ng0P@ss!"
+    volumes:
+      - mongodbdata:/data/db
+
 volumes:
   sql_data:
+  mongodbdata:

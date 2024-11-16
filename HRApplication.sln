@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Persistence", "HRApplication.Persistence\HRApplication.Persistence.csproj", "{9F515C05-3037-47F2-879F-AC0943F5479D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{F1CF3799-C122-4C96-97E7-9DB599F47FFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalIdentityServer", "GlobalIdentityServer\GlobalIdentityServer.csproj", "{C2E952EC-8DBF-4181-9E8B-04259A41E840}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{9F515C05-3037-47F2-879F-AC0943F5479D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F515C05-3037-47F2-879F-AC0943F5479D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F515C05-3037-47F2-879F-AC0943F5479D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E952EC-8DBF-4181-9E8B-04259A41E840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E952EC-8DBF-4181-9E8B-04259A41E840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E952EC-8DBF-4181-9E8B-04259A41E840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E952EC-8DBF-4181-9E8B-04259A41E840}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +77,8 @@ Global
 		{526D925F-4AB8-416C-A0D7-F2B11C866C83} = {34B8BDC9-FD61-4E10-8A09-C2939DFB722C}
 		{834B49FB-1DA6-4B5E-B4DB-02A18F0824CC} = {34B8BDC9-FD61-4E10-8A09-C2939DFB722C}
 		{9F515C05-3037-47F2-879F-AC0943F5479D} = {34B8BDC9-FD61-4E10-8A09-C2939DFB722C}
+		{F1CF3799-C122-4C96-97E7-9DB599F47FFD} = {3D2A2700-3B9D-4531-9479-936249F18D9B}
+		{C2E952EC-8DBF-4181-9E8B-04259A41E840} = {F1CF3799-C122-4C96-97E7-9DB599F47FFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C00697D7-B837-47C1-AC76-BB7CE7FFF331}

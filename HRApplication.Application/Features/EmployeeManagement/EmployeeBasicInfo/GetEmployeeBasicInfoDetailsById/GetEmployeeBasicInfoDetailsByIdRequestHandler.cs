@@ -7,19 +7,15 @@ using System.Data.Entity;
 
 namespace HRApplication.Application.Features.EmployeeManagement.EmployeeBasicInfo.GetEmployeeBasicInfoDetailsById;
 
-public class GetEmployeeBasicInfoDetailsByIdRequestHandler(IUnitofWork unitOfWork) : IRequestHandler<GetEmployeeBasicInfoDetailsByIdRequest, Result<GetEmployeeBasicInfoDto>>
+public class GetEmployeeBasicInfoDetailsByIdRequestHandler(IUnitofWork unitOfWork) : IRequestHandler<GetEmployeeBasicInfoDetailsByIdRequest, GetEmployeeBasicInfoDto?>
 {
     public readonly IUnitofWork _unitOfWork = unitOfWork;
-    public async Task<Result<GetEmployeeBasicInfoDto>> Handle(GetEmployeeBasicInfoDetailsByIdRequest request, CancellationToken cancellationToken)
+    public async Task<GetEmployeeBasicInfoDto?> Handle(GetEmployeeBasicInfoDetailsByIdRequest request, CancellationToken cancellationToken)
     {
         var EmployeeDetails = await _unitOfWork.EmployeeBasicInfoRepository
                                             .GetEmployeeDetailsbyId(request.EmployeeId)
                                             .MapToEmployeeBasicInfoDto()
                                             .FirstOrDefaultAsync();
-
-        if (EmployeeDetails is null)
-            return Errors.ContentNotFound;
-
         return EmployeeDetails;
     }
 }
