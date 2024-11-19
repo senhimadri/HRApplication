@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 
+builder.Services.AddHealthChecks();
+
 
 builder.Services.AddControllers();
 AddSwaggerDoc(builder.Services);
@@ -25,11 +27,12 @@ builder.Services.AddCors(o =>
 
 var app = builder.Build();
 
-if (builder.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
+
+app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
