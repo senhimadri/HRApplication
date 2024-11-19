@@ -22,6 +22,16 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: "S3cur3M0ng0P@ss!"
     volumes:
       - mongodbdata:/data/db
+  
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - mssql
+      - mongo
 
 volumes:
   sql_data:
