@@ -36,6 +36,10 @@ public class TblEmployeeBasicInfoConfiguration : IEntityTypeConfiguration<TblEmp
         builder.HasOne(e => e.TblReligionInfo)
             .WithMany(d => d.TblEmployeeBasicInfo)
             .HasForeignKey(e => e.IntReligionId);
+
+        builder.HasOne(e => e.TblUserInformation)
+            .WithOne(u => u.TblEmployeeBasicInfo)
+            .HasForeignKey<TblEmployeeBasicInfo>(e => e.UserId);
     }
 }
 

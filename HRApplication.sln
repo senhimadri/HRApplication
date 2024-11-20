@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HRApplication.Persistence",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{F1CF3799-C122-4C96-97E7-9DB599F47FFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalIdentityServer", "GlobalIdentityServer\GlobalIdentityServer.csproj", "{C2E952EC-8DBF-4181-9E8B-04259A41E840}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalIdentityServer", "GlobalIdentityServer\GlobalIdentityServer.csproj", "{C2E952EC-8DBF-4181-9E8B-04259A41E840}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
