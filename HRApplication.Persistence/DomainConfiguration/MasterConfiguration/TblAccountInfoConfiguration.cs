@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HRApplication.Domain.CommonDomain;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using HRApplication.Domain.MasterConfiguratio;
 
 namespace HRApplication.Persistence.DomainConfiguration.MasterConfiguration;
 public class TblAccountInfoConfiguration : IEntityTypeConfiguration<AccountInformation>

@@ -1,7 +1,6 @@
 ﻿using HRApplication.Domain.CommonDomain;
 using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveManagement;
-using HRApplication.Domain.MasterConfiguratio;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -52,7 +51,7 @@ public class HRApplicationDBContext : DbContext
             entity.Entity.IntAccountId = 1;
             if (entity.State == EntityState.Added)
             {
-                entity.Entity.DteCtratedAt = DateTime.UtcNow;
+                entity.Entity.DteCtrated = DateTime.UtcNow;
                 entity.Entity.IntCreatedBy = 1;
                 entity.Entity.IsActive = true;
             }

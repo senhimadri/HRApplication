@@ -1,7 +1,6 @@
 using HRApplication.Application.Contracts.Parsistence;
 using HRApplication.Application.Contracts.Parsistence.EmployeeManagement;
 using HRApplication.Persistence.Repositories.EmployeeManagement;
-using Microsoft.EntityFrameworkCore;
 namespace HRApplication.Persistence.Repositories;
 
 public class UnitofWork : IUnitofWork

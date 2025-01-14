@@ -1,7 +1,7 @@
 ﻿using HRApplication.Domain.EmployeeManagement;
 using HRApplication.Domain.LeaveManagement;
 
-namespace HRApplication.Domain.MasterConfiguratio;
+namespace HRApplication.Domain.CommonDomain;
 
 public class AccountInformation
 {

@@ -8,6 +8,6 @@ public static class Errors
     public static readonly OperationError UnauthorizedAccess = new OperationError(401, "Unauthorized access.");
     public static readonly OperationError Forbidden = new OperationError(403, "Forbidden access.");
     public static readonly OperationError ValidationFailed = new OperationError(422, "Validation failed.");
-    public static OperationError NewError(int Code, string message) => new OperationError(Code, message);
+    public static OperationError NewError(int code, string message) => new OperationError(code, message);
 }
 

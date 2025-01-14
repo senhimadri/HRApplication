@@ -7,7 +7,6 @@ public static class DepartmentInfoMap
 {
     public static TblDepartmentInfo CreateDepartment(CreateDepartmentDto data)
     {
-
         return new TblDepartmentInfo
         {
             StrDepartmentName = data.DepartmentName,
@@ -17,7 +16,6 @@ public static class DepartmentInfoMap
 
     public static TblDepartmentInfo UpdateDepartment(UpdateDepartmentDto data)
     {
-
         return new TblDepartmentInfo
         {
             IntPrimaryId = data.PrimaryId,
