@@ -92,4 +92,13 @@ public class DepartmentInfoController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
     }
+
+    [HttpGet]
+    [Route("GetTestAPI4")]
+    public async Task<IActionResult> GetTestAPI4(long _departmentId)
+    {
+        var request = new GetDepartmentInfoDetailsByIdRequest { DepartmentId = _departmentId };
+        var response = await _mediator.Send(request);
+        return Ok(response);
+    }
 }
