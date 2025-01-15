@@ -100,5 +100,6 @@ public class DepartmentInfoController : ControllerBase
         var request = new GetDepartmentInfoDetailsByIdRequest { DepartmentId = _departmentId };
         var response = await _mediator.Send(request);
         return Ok(response);
+
     }
 }
