@@ -1,0 +1,47 @@
+name: Docker CI/CD with Local Deployment
+
+on:
+  push:
+    branches:
+      - main  # Trigger on main branch updates
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup .NET SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0  # Use your .NET version
+
+      # Step 3: Restore dependencies
+      - name: Restore Dependencies
+        run: dotnet restore API/HRApplication.API/HRApplication.API.csproj
+
+      # Step 4: Build the project
+      - name: Build Project
+        run: dotnet build API/HRApplication.API/HRApplication.API.csproj --configuration Release
+
+      # Step 5: Publish the project
+      - name: Publish Project
+        run: dotnet publish API/HRApplication.API/HRApplication.API.csproj --configuration Release --output ./publish
+
+      # Step 6: Build Docker image
+      - name: Build Docker Image
+        run: docker build -t hrapplication:latest -f API/HRApplication.API/Dockerfile .
+
+      # Step 7: Push Docker image to your local Docker
+      - name: Deploy Docker Image Locally
+        run: |
+          docker stop hrapplication || true  # Stop the container if it's running
+          docker rm hrapplication || true   # Remove the container if it exists
+          docker run -d -p 8080:8080 --name hrapplication hrapplication:latest
+        env:
+          DOCKER_HOST: tcp://172.28.160.1:2375  # Replace with your Windows machine's IP
+      
