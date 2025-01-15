@@ -22,19 +22,19 @@ jobs:
 
       # Step 3: Restore dependencies
       - name: Restore Dependencies
-        run: dotnet restore API/HRApplication.API/HRApplication.API.csproj
+        run: dotnet restore HRApplication.API/HRApplication.API.csproj
 
       # Step 4: Build the project
       - name: Build Project
-        run: dotnet build API/HRApplication.API/HRApplication.API.csproj --configuration Release
+        run: dotnet build HRApplication.API/HRApplication.API.csproj --configuration Release
 
       # Step 5: Publish the project
       - name: Publish Project
-        run: dotnet publish API/HRApplication.API/HRApplication.API.csproj --configuration Release --output ./publish
+        run: dotnet publish HRApplication.API/HRApplication.API.csproj --configuration Release --output ./publish
 
       # Step 6: Build Docker image
       - name: Build Docker Image
-        run: docker build -t hrapplication:latest -f API/HRApplication.API/Dockerfile .
+        run: docker build -t hrapplication:latest -f HRApplication.API/Dockerfile .
 
       # Step 7: Push Docker image to your local Docker
       - name: Deploy Docker Image Locally
