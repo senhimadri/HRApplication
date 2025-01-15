@@ -101,5 +101,7 @@ public class DepartmentInfoController : ControllerBase
         var response = await _mediator.Send(request);
         return Ok(response);
 
+
+
     }
 }
