@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  hr
   mssql:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: sqlserver
