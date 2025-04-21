@@ -21,9 +21,14 @@ public class GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) : I
         if (request.LandingParameeter is null)
             return Errors.ContentNotFound;
 
-        var employeeLandingFilter = BuildEmployeeLandingFilter(request);
+        IEmployeeFilterBuilder empFilter = new EmployeeFilterBuilder();
 
-        var employeeDetails = await FetchEmployeeDetails(employeeLandingFilter, request.LandingParameeter.PageNo, request.LandingParameeter.PageSize);
+        var employeeLandingFilter = empFilter
+                                    .IncludeSearchText(request.LandingParameeter?.SearchText)
+                                    .IncludeDepartmentIdList(request.LandingParameeter?.DepartmentIdList)
+                                    .Build();
+
+        var employeeDetails = await FetchEmployeeDetails(employeeLandingFilter, request.LandingParameeter?.PageNo ?? 1, request.LandingParameeter?.PageSize ??0);
 
         if (employeeDetails.Data is null || !employeeDetails.Data.Any())
             return Errors.ContentNotFound;
@@ -67,7 +72,102 @@ public class GetEmployeesBasicInfoListRequestHandler(IUnitofWork unitofWork) : I
         if (request.LandingParameeter?.ReligionIdList?.Any() == true )
             filter = filter.And(x => request.LandingParameeter.ReligionIdList.Contains(x.IntReligionId));
 
+        
+
         return filter;
     }
 
+}
+
+public interface IEmployeeFilterBuilder
+{
+    IEmployeeFilterBuilder IncludeSearchText(string? searchText);
+    IEmployeeFilterBuilder IncludeDepartmentIdList(List<long>? departmentIdList);
+    IEmployeeFilterBuilder IncludeDepartmentId(long departmentId);
+    IEmployeeFilterBuilder IncludeDesignationIdList(List<long>? designationIdList);
+    IEmployeeFilterBuilder IncludeDesignationId(long designationId);
+    IEmployeeFilterBuilder IncludeGenderIdList(List<long>? genderIdList);
+    IEmployeeFilterBuilder IncludeGenderId(long genderId);
+    IEmployeeFilterBuilder IncludeReligionIdList(List<long>? religionIdList);
+    IEmployeeFilterBuilder IncludeReligionId(long religionId);
+
+    Expression<Func<TblEmployeeBasicInfo, bool>> Build();
+
+}
+
+public class EmployeeFilterBuilder : IEmployeeFilterBuilder
+{
+    private ExpressionStarter<TblEmployeeBasicInfo> filter;
+
+    public EmployeeFilterBuilder()=>  filter = PredicateBuilder.New<TblEmployeeBasicInfo>(true);
+
+    public IEmployeeFilterBuilder IncludeSearchText(string? searchText)
+    {
+        if (!string.IsNullOrEmpty(searchText))
+            filter = filter.And(x =>
+               (x.StrEmployeeName != null && x.StrEmployeeName.Contains(searchText)) ||
+               (x.StrEmployeeCode != null && x.StrEmployeeCode.Contains(searchText)) ||
+               (x.TblDepartmentInfo != null && x.TblDepartmentInfo.StrDepartmentName != null && x.TblDepartmentInfo.StrDepartmentName.Contains(searchText)) ||
+               (x.TblDesignationInfo != null && x.TblDesignationInfo.StrDesignationName != null && x.TblDesignationInfo.StrDesignationName.Contains(searchText)) ||
+               (x.TblReligionInfo != null && x.TblReligionInfo.StrReligionName != null && x.TblReligionInfo.StrReligionName.Contains(searchText)) ||
+               (x.TblGenderInfo != null && x.TblGenderInfo.StrGenderName != null && x.TblGenderInfo.StrGenderName.Contains(searchText)));
+        return this;
+    }
+   
+    public IEmployeeFilterBuilder IncludeDepartmentId(long departmentId)
+    {
+        filter = filter.And(x => departmentId == 0 || x.IntDepartmentId == departmentId);
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeDepartmentIdList(List<long>? departmentIdList)
+    {
+        if (departmentIdList?.Any()==true)
+            filter = filter.And(x => departmentIdList.Contains(x.IntDepartmentId));
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeDesignationId(long designationId)
+    {
+        filter = filter.And(x => designationId == 0 || x.IntDesignationId == designationId);
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeDesignationIdList(List<long>? designationIdList)
+    {
+        if (designationIdList?.Any() == true)
+            filter = filter.And(x => designationIdList.Contains(x.IntDesignationId));
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeGenderId(long genderId)
+    {
+        filter = filter.And(x => genderId == 0 || x.IntGenderId == genderId);
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeGenderIdList(List<long>? genderIdList)
+    {
+        if (genderIdList?.Any() == true)
+            filter = filter.And(x => genderIdList.Contains(x.IntGenderId));
+
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeReligionId(long religionId)
+    {
+        filter = filter.And(x => religionId == 0 || x.IntReligionId == religionId);
+
+        return this;
+    }
+
+    public IEmployeeFilterBuilder IncludeReligionIdList(List<long>? religionIdList)
+    {
+        if (religionIdList?.Any() == true)
+            filter = filter.And(x => religionIdList.Contains(x.IntReligionId));
+
+        return this;
+    }
+
+    public Expression<Func<TblEmployeeBasicInfo, bool>> Build() => filter;
 }

@@ -42,3 +42,12 @@ public class EmployeeBasicInfoRepository : GenericRepository<TblEmployeeBasicInf
     }
 }
 
+
+public interface IEmployeeQueryBuilder
+{
+    IEmployeeQueryBuilder IncludeDepartment();
+    IEmployeeQueryBuilder IncludeDesignation();
+    IEmployeeQueryBuilder IncludeGender();
+    IEmployeeQueryBuilder IncludeReligion();
+}
+
